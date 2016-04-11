@@ -6,7 +6,7 @@ so？so 年前买了这本书，都说好，却一直没看。
 
 # 目录
 
-- 第8章 随遇而安--状态模式
+- [第8章 随遇而安--状态模式](https://github.com/mBigFlower/InitApp/tree/master/blog/design_patterns/8_state)
 
 # 都说
 

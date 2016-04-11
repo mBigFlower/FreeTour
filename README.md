@@ -5,7 +5,7 @@
 
 ## 目录
 
-- [设计模式]()
+- [设计模式](https://github.com/mBigFlower/InitApp/tree/master/blog/design_patterns)
 
 //-------------------------------------------------
 华丽的分割线 下面的内容是想到就mark下来的，尚未添加内容

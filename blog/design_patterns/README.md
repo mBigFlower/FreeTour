@@ -10,7 +10,7 @@ so？so 年前买了这本书，都说好，却一直没看。
 - [第3章 自由扩展你的项目--Builder模式](https://github.com/mBigFlower/InitApp/tree/master/blog/design_patterns/3_builder)
 
 # 都说
-
+ 
 无论是什么，总有两面性。这些模式有优势，必然也有短板。不要盲目的使用设计模式，合适的才是最好的。
 
 不过话说回来，我也不知道怎么才算“合适”，我想这个界限就是需要大家去慢慢摸索的吧。

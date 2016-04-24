@@ -7,8 +7,22 @@
 
 ## 目录
 
-- [利其器](https://github.com/mBigFlower/InitApp/tree/master/blog/Setting)
+- [工具](https://github.com/mBigFlower/InitApp/tree/master/blog/setting)
+- [this](#this)
 - [设计模式](https://github.com/mBigFlower/InitApp/tree/master/blog/design_patterns)
+
+<h1 id=this> this </h1>
+
+还不知道这个APP到底可以来干啥，慢慢来吧。
+
+## Step 1
+
+去看[**工具**](https://github.com/mBigFlower/InitApp/tree/master/blog/setting)吧，里面会提到Studio、Gradle、插件以及一些实用的工具。
+如果你是高玩，请跳过这一步
+
+## Step 2
+
+
 
 //-------------------------------------------------
 

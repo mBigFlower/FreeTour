@@ -11,7 +11,7 @@
 - [this](#this)
 - [设计模式](https://github.com/mBigFlower/InitApp/tree/master/blog/design_patterns)
 - [Java性能优化tips](https://github.com/mBigFlower/InitApp/tree/master/blog/optimization)
-
+ 
 <h1 id=this> this </h1>
 
 还不知道这个APP到底可以来干啥，慢慢来吧。

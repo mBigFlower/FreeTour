@@ -10,6 +10,7 @@
 - [工具](https://github.com/mBigFlower/InitApp/tree/master/blog/setting)
 - [this](#this)
 - [设计模式](https://github.com/mBigFlower/InitApp/tree/master/blog/design_patterns)
+- [Java性能优化tips](https://github.com/mBigFlower/InitApp/tree/master/blog/optimization)
 
 <h1 id=this> this </h1>
 

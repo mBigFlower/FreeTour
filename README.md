@@ -43,9 +43,13 @@
 
 ### lamda表达式
 
-### 我常逛的网站
+### 学习安卓的网站
 
 - [掘金](http://gold.xitu.io/)
-- [安卓开发技术周报](http://www.androidweekly.cn/)
-- Weekly 这个是歪果仁的，以前一直以为跟周报是一样的。支持订阅哈
+- [安卓开发技术周报](http://www.androidweekly.cn/) Android开发技术周报是由@脉脉不嘚語 维护更新，截止到现在，已经发布了28 期，分享的都是高质量的文章教程，代码库，工具，新闻视频，设计等。
+- [Weekly](http://androidweekly.net/) 是由一群国外知名的Android 开发者维护，分享的内容不仅仅只有干货，而且还有最新的技术分享，也是Android 开发圈子最早，最有名的周报。如果想看中文版，请移步知乎专栏——《Android Weekly - 知乎专栏》。
 - [慕课网](http://www.imooc.com/) 质量挺高的，初学者必备
+
+**[当然还有其他](http://tikitoo.me/2016/04/26/android-worth-subscribe-daily-weekly/)**
+
+  

@@ -8,6 +8,7 @@ so？so 年前买了这本书，都说好，却一直没看。
 
 - [第8章 随遇而安--状态模式](https://github.com/mBigFlower/InitApp/tree/master/blog/design_patterns/8_state)
 - [第3章 自由扩展你的项目--Builder模式](https://github.com/mBigFlower/InitApp/tree/master/blog/design_patterns/3_builder)
+- [第12章 解决、解耦的钥匙--观察者模式](https://github.com/mBigFlower/InitApp/tree/master/blog/design_patterns/12_observer)
 
 # 都说
  

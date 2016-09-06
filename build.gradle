@@ -5,10 +5,11 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.2.3'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.android.tools.build:gradle:2.1.2'
+        // 注解处理器
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        // for lamda
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
     }
 }
 
@@ -20,4 +21,51 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+def supportVersion = "23.4.0"
+def retrofitVersion = "2.0.0-beta4"
+def daggerVersion = "2.2"
+def butterknifeVersion = "8.0.1"
+def leakcanaryVersion = '1.4-beta2'
+
+ext {
+
+    applicationId = "com.flowerfat.initapp"
+    buildToolsVersion = "23.0.3"
+    compileSdkVersion = 23
+    minSdkVersion = 14
+    targetSdkVersion = 23
+    versionCode = 1
+    versionName = "1.0.0"
+
+    libSupportAppcompat = "com.android.support:appcompat-v7:${supportVersion}"
+//    libSupportDesign = "com.android.support:design:${supportVersion}"
+//    libSupportRecyclerview = "com.android.support:recyclerview-v7:${supportVersion}"
+//    libSupportV4 = "com.android.support:support-v4:${supportVersion}"
+
+    libButterknife = "com.jakewharton:butterknife:$butterknifeVersion";
+    libButterknifeCompiler = "com.jakewharton:butterknife-compiler:$butterknifeVersion";
+
+    libRxAndroid = "io.reactivex:rxandroid:1.1.0"
+    libRxJava = "io.reactivex:rxjava:1.1.2"
+//    libEventBus = "org.greenrobot:eventbus:3.0.0"
+//    libJavaxAnnotation = "javax.annotation:jsr250-api:1.0"
+
+    libGson = "com.google.code.gson:gson:2.4"
+    libRetrofit = "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    libRetrofitConverterGson = "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    libRetrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}"
+    libOkHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:3.0.0-RC1"
+
+    libDagger = "com.google.dagger:dagger:${daggerVersion}"
+    libDaggerCompiler = "com.google.dagger:dagger-compiler:${daggerVersion}"
+    libDaggerAnnotation = 'org.glassfish:javax.annotation:10.0-b28'
+
+    libLeakCanaryDebug = "com.squareup.leakcanary:leakcanary-android:${leakcanaryVersion}"
+    libLeakCanaryRelease = "com.squareup.leakcanary:leakcanary-android-no-op:${leakcanaryVersion}"
+    libLeakCanaryTest = "com.squareup.leakcanary:leakcanary-android-no-op:${leakcanaryVersion}"
+//    libGlide = "com.github.bumptech.glide:glide:3.7.0"
+
+    libRobolectric = "org.robolectric:robolectric:3.0"
 }

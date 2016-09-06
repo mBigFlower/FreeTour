@@ -30,22 +30,23 @@
 
 参考的工程有
 
-- [**MVP-Dagger2-Retrofit**](https://github.com/thinkSky1206/MVP-Dagger2-Retrofit)、
-- [**RxJoke**](https://github.com/JDDJJ/RxJoke)、
+- [**MVP-Dagger2-Retrofit**](https://github.com/thinkSky1206/MVP-Dagger2-Retrofit)
+- [**RxJoke**](https://github.com/JDDJJ/RxJoke)
 - [**PhotoNoter**](https://github.com/yydcdut/PhotoNoter)
 
 三个工程循序渐进，很有收获=。=
 
 [0512 22:44]
-说实话以前一直用的时MVC，最多把Model和View分离开来。最近研究这个Dagger+MVP简直懵逼。所以我在这里奉劝大家：一步一个脚印。
+说实话以前一直用的是MVC，最多把Model和View分离开来。最近研究这个Dagger+MVP简直懵逼。所以我在这里奉劝大家：一步一个脚印。
 
-具体的我会单拎出来一个工程来分别写MVC、MVP与MVP+Dagger2，小白篇，[详情点这里](https://github.com/mBigFlower/ArchitectureLearning)。
+具体的我会单拎出来一个工程来分别写MVC、MVP与MVP+Dagger2，小白篇，[详情点这里 ArchitectureLearning](https://github.com/mBigFlower/ArchitectureLearning)。
+这个工程里还附带了学到的测试代码。
 
 ### MVP
 
 先来说说MVP的特点吧：低耦合、抽象、单一职责。。。各个层级之间相互独立，方便修改与测试。
 
-官方已经有很棒的demo了，[看这里](https://github.com/googlesamples/android-architecture)，
+官方已经有很棒的demo了，[看这里 android-architecture](https://github.com/googlesamples/android-architecture)，
 在里面点击不同分支即可查看不同的架构，这里我们主要看MVP分支
 
 ### 通过Gradle导入必要库
@@ -107,9 +108,9 @@
 
 ### 学习安卓的网站
 
-- [掘金](http://gold.xitu.io/)
+- [掘金](http://gold.xitu.io/) 
 - [安卓开发技术周报](http://www.androidweekly.cn/) Android开发技术周报是由@脉脉不嘚語 维护更新，截止到现在，已经发布了28 期，分享的都是高质量的文章教程，代码库，工具，新闻视频，设计等。
 - [Weekly](http://androidweekly.net/) 是由一群国外知名的Android 开发者维护，分享的内容不仅仅只有干货，而且还有最新的技术分享，也是Android 开发圈子最早，最有名的周报。如果想看中文版，请移步知乎专栏——《Android Weekly - 知乎专栏》。
 - [慕课网](http://www.imooc.com/) 质量挺高的，初学者必备
-- **[当然还有其他](http://tikitoo.me/2016/04/26/android-worth-subscribe-daily-weekly/)**
+- **当然还有其他**
 

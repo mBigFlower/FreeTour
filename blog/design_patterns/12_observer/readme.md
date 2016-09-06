@@ -36,7 +36,7 @@
 
     adapter.notifyDataSetChanged();
 
-不晓得你们以后没有看过这句话的源码，该函数调用了DataSetObservalbe的notifyChanged函数。
+不晓得你们有没有看过这code的源码，其内部调用了DataSetObservalbe的notifyChanged函数。
 而这个函数又会执行观察者(AdapterDataSetObserver)的onChanged方法，onChanged中计算了ListView的条目，然后调用了ListView的重新布局，刷新界面。
 
 其中的观察者就是在setAdapter时建立的。

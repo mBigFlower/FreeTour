@@ -1,4 +1,4 @@
-package com.flowerfat.initapp.ui.activity;
+package com.flowerfat.initapp.ui.main;
 
 import javax.inject.Scope;
 

@@ -1,9 +1,5 @@
-package com.flowerfat.initapp.ui.activity.module;
+package com.flowerfat.initapp.ui.main;
 
-
-import com.flowerfat.initapp.ui.activity.ActivityScope;
-import com.flowerfat.initapp.ui.activity.MainActivity;
-import com.flowerfat.initapp.ui.activity.presenter.MainActivityPresenter;
 
 import dagger.Module;
 import dagger.Provides;

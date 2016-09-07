@@ -40,7 +40,7 @@ ext {
     versionName = "1.0.0"
 
     libSupportAppcompat = "com.android.support:appcompat-v7:${supportVersion}"
-//    libSupportDesign = "com.android.support:design:${supportVersion}"
+    libSupportDesign = "com.android.support:design:${supportVersion}"
 //    libSupportRecyclerview = "com.android.support:recyclerview-v7:${supportVersion}"
 //    libSupportV4 = "com.android.support:support-v4:${supportVersion}"
 

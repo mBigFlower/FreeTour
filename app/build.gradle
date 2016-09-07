@@ -31,6 +31,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile rootProject.ext.libSupportAppcompat
+    compile rootProject.ext.libSupportDesign
     compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
     // 下面两个是butterknife的
     compile rootProject.ext.libButterknife

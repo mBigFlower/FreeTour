@@ -1,4 +1,4 @@
-package com.flowerfat.initapp.ui.main;
+package com.flowerfat.initapp.ui.tour;
 
 
 import dagger.Module;

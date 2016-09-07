@@ -1,4 +1,4 @@
-package com.flowerfat.initapp.ui.main;
+package com.flowerfat.initapp.ui.tour;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -68,7 +68,7 @@ public class MainActivity extends BaseActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        mAdapter.addFragment(new TourFragment(), "Default");
+        mAdapter.addFragment(new TourSettingFragment(), "Default");
 
         viewPager.setAdapter(mAdapter);
     }

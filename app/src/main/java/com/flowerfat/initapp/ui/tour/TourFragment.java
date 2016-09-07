@@ -1,4 +1,4 @@
-package com.flowerfat.initapp.ui.main;
+package com.flowerfat.initapp.ui.tour;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +12,7 @@ import com.flowerfat.initapp.R;
 /**
  * Created by 明明大美女 on 2016/9/7.
  */
-public class TourFragment  extends Fragment {
+public class TourFragment extends Fragment {
 
     @Nullable
     @Override

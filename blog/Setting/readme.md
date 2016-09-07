@@ -40,7 +40,9 @@ Alt+F 就能看到**Import Settings**和**Export Settings** 把导出的Settings
 2. 选中Plugins, 然后选择 Browser...
 
 - Sexy Editor 这个插件绝笔炫酷，但是用久了会卡。。。 （刚刚我搜了一下，怎么没找到。。。）
+- ButterKnife Zelezny 配合ButterKnife使用，一键导入所有的BindView，简直不要太爽
 - GsonFormat 服务器返回的Json数据，直接用它生成对应实体类
+- [Material Design Icon](https://github.com/konifar/android-material-design-icon-generator-plugin) 图片生成器，DIY神器，省去了手动打开Iconfront 
 - Markdown 顾名思义，可有可无
 
 ## Gradle

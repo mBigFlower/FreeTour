@@ -7,7 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="18sp"
+        android:padding="6dp"
         android:gravity="center"
-        android:text="这个页面是一些旅游所共性的设置，提供一些选项吧，尽量不让用户自己输入"/>
+        android:text="时间\n装备\n药物\n想吃啥？"/>
 
 </LinearLayout>

@@ -8,6 +8,7 @@
         android:layout_height="match_parent"
         android:textSize="18sp"
         android:gravity="center"
+        android:padding="3dp"
         android:text="Back To The Earth\n   -- I'm going back to the earth"/>
 
 </LinearLayout>

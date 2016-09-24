@@ -17,8 +17,11 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(getLayoutResID(), container, false);
         ButterKnife.bind(this, v);
+        main();
         return v;
     }
 
     protected abstract int getLayoutResID();
+
+    protected abstract void main();
 }

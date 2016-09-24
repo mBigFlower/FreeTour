@@ -11,8 +11,11 @@ import android.view.MenuItem;
 
 import com.flowerfat.initapp.AppComponent;
 import com.flowerfat.initapp.R;
-import com.flowerfat.initapp.base.BaseActivity;
+import com.flowerfat.initapp.base.BaseDaggerActivity;
+import com.flowerfat.initapp.ui.aboutus.AboutUsActivity;
 import com.flowerfat.initapp.ui.adapter.ViewPagerAdapter;
+import com.flowerfat.initapp.ui.feedback.FeedbackActivity;
+import com.flowerfat.initapp.ui.history.HistoryActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -32,7 +35,7 @@ import butterknife.OnClick;
 //
 //  高山仰止,景行行止.虽不能至,心向往之。
 
-public class MainActivity extends BaseActivity implements
+public class MainActivity extends BaseDaggerActivity implements
         NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.drawer_layout)
@@ -87,7 +90,6 @@ public class MainActivity extends BaseActivity implements
 
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(0).setChecked(true);
     }
 
     /**
@@ -95,17 +97,18 @@ public class MainActivity extends BaseActivity implements
      */
     private void setupViewPager() {
         mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        mAdapter.addFragment(new TourSettingFragment(), "Default");
+        mAdapter.addFragment(new TourMainFragment(), "Default");
 
         mViewPager.setAdapter(mAdapter);
     }
 
     @OnClick(R.id.fab)
     void add() {
-        mAdapter.addFragment(new TourFragment(), "User Add");
+        mAdapter.addFragment(new TourFragment(), "Day " + mAdapter.getCount());
         mAdapter.notifyDataSetChanged();
+        // 增加一页后，跳转到该新页面
+        mViewPager.setCurrentItem(mAdapter.getCount());
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -116,7 +119,6 @@ public class MainActivity extends BaseActivity implements
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -130,6 +132,7 @@ public class MainActivity extends BaseActivity implements
 
     /**
      * 左侧导航栏点击
+     *
      * @param item
      * @return
      */
@@ -138,21 +141,21 @@ public class MainActivity extends BaseActivity implements
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.nav_tour:
-                setTitle(item.getTitle());
+
                 break;
             case R.id.nav_history:
-                setTitle(item.getTitle());
+                HistoryActivity.launch(this);
                 break;
             case R.id.nav_setting:
 
                 break;
             case R.id.nav_aboutus:
-
+                AboutUsActivity.launch(this);
                 break;
             case R.id.nav_feedback:
-
+                FeedbackActivity.launch(this);
                 break;
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);

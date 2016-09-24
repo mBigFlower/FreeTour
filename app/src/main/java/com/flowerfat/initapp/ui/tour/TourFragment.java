@@ -13,4 +13,9 @@ public class TourFragment extends BaseFragment {
         return R.layout.fragment_tour;
     }
 
+    @Override
+    protected void main() {
+
+    }
+
 }

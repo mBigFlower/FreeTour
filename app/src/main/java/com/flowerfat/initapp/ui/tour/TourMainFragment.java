@@ -1,0 +1,73 @@
+package com.flowerfat.initapp.ui.tour;
+
+import android.app.DatePickerDialog;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.widget.TextView;
+
+import com.flowerfat.initapp.R;
+import com.flowerfat.initapp.base.BaseFragment;
+import com.flowerfat.initapp.ui.adapter.TourMainSettingAdapter;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+
+/**
+ * Created by 明明大美女 on 2016/9/7.
+ * <p>
+ * 这个是每次新建一个自由行攻略必需的设置页
+ */
+public class TourMainFragment extends BaseFragment {
+
+    @BindView(R.id.tour_main_date)
+    TextView mDateTv;
+    @BindView(R.id.tour_main_recyclerview)
+    RecyclerView mSettingRv;
+
+    TourMainSettingAdapter mAdapter ;
+
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.fragment_tour_main;
+    }
+
+    @Override
+    protected void main() {
+        initRecyclerView();
+    }
+
+    private void initRecyclerView() {
+        // 瀑布流布局
+        mSettingRv.setLayoutManager(new StaggeredGridLayoutManager(2,
+                StaggeredGridLayoutManager.VERTICAL));
+
+        List<String> data = new ArrayList<>();
+        data.add("5");
+        data.add("9");
+        data.add("6");
+        data.add("7");
+        data.add("0");
+        mAdapter = new TourMainSettingAdapter(data);
+        mSettingRv.setAdapter(mAdapter);
+    }
+
+    @OnClick(R.id.tour_main_date)
+    void toPrepareAct() {
+//        ChoicePopup choicePopup = new ChoicePopup(getContext());
+//        choicePopup.showAsDropDown(mDateTv);
+        Calendar now = Calendar.getInstance();
+        DatePickerDialog dpd = new DatePickerDialog(
+                getActivity(), (view, year, monthOfYear, dayOfMonth) -> {
+            mDateTv.setText(year + " " + monthOfYear + " " + dayOfMonth);
+        },
+                now.get(Calendar.YEAR),
+                now.get(Calendar.MONTH),
+                now.get(Calendar.DAY_OF_MONTH)
+        );
+        dpd.show();
+    }
+}

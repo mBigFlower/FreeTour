@@ -1,6 +1,8 @@
 package com.flowerfat.initapp.ui.tour;
 
 
+import com.flowerfat.initapp.ui.ActivityScope;
+
 import dagger.Module;
 import dagger.Provides;
 

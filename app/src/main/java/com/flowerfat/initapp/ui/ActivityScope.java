@@ -1,4 +1,4 @@
-package com.flowerfat.initapp.ui.tour;
+package com.flowerfat.initapp.ui;
 
 import javax.inject.Scope;
 

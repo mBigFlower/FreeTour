@@ -5,9 +5,11 @@
         <item
             android:id="@+id/nav_tour"
             android:icon="@drawable/ic_add_white_24dp"
+            android:checked="true"
             android:title="Tour" />
         <item
             android:id="@+id/nav_history"
+            android:checkable="false"
             android:icon="@drawable/ic_history_white_24dp"
             android:title="History" />
     </group>

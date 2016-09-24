@@ -2,6 +2,7 @@ package com.flowerfat.initapp.ui.tour;
 
 
 import com.flowerfat.initapp.AppComponent;
+import com.flowerfat.initapp.ui.ActivityScope;
 
 import dagger.Component;
 

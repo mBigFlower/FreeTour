@@ -38,9 +38,14 @@ public abstract class ExpandLayout extends FrameLayout {
 
     public abstract int initExpandRes();
 
+    public abstract void main();
+
+
+
     private void init() {
         initTitle();
         initExpandLayout();
+        main();
     }
 
     private void initTitle() {

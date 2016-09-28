@@ -1,0 +1,80 @@
+{
+  "settingItems": [
+    {
+      "title": "电子数码",
+      "items": {
+        "电源转换器": false,
+        "各类充电器": false,
+        "移动电源": false,
+        "移动WIFI": false,
+        "相机": false
+      }
+    },
+    {
+      "title": "医疗健康",
+      "items": {
+        "止疼药": false,
+        "感冒药": false,
+        "纸巾": false,
+        "创可贴": false,
+        "防虫驱蚊": false
+      }
+    },
+    {
+      "title": "个护化妆",
+      "items": {
+        "洗发水/护发素": false,
+        "沐浴液": false,
+        "防晒霜": false,
+        "牙膏牙刷": false,
+        "棉签": false,
+        "梳子": false,
+        "毛巾": false
+      }
+    },
+    {
+      "title": "服装",
+      "items": {
+        "长袖衬衫": false,
+        "外套": false,
+        "袜子": false,
+        "内衣裤": false,
+        "运动鞋": false,
+        "拖鞋": false,
+        "帽子": false
+      }
+    },
+    {
+      "title": "资金",
+      "items": {
+        "现金": false,
+        "银行卡": false,
+        "信用卡": false
+      }
+    },
+    {
+      "title": "文件备份",
+      "items": {
+        "护照签证及复印件": false,
+        "行程单": false,
+        "紧急联系方式": false,
+        "酒店预订单及复印件": false
+      }
+    },
+    {
+      "title": "行前准备",
+      "items": {
+        "购买机票/车票": false,
+        "预定酒店": false,
+        "购买旅行保险": false,
+        "换钱": false,
+        "分享行程给家人朋友": false,
+        "锁好贵重物品": false,
+        "充气枕/耳塞/眼罩": false,
+        "干/湿纸巾": false,
+        "雨伞/雨衣": false,
+        "办理签证": false
+      }
+    }
+  ]
+}

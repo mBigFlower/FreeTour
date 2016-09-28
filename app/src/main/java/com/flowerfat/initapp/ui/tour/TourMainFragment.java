@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.flowerfat.initapp.R;
 import com.flowerfat.initapp.base.BaseFragment;
+import com.flowerfat.initapp.model.TourSettingItem;
 import com.flowerfat.initapp.ui.adapter.TourMainSettingAdapter;
 
 import java.util.ArrayList;
@@ -45,12 +46,9 @@ public class TourMainFragment extends BaseFragment {
         mSettingRv.setLayoutManager(new StaggeredGridLayoutManager(2,
                 StaggeredGridLayoutManager.VERTICAL));
 
-        List<String> data = new ArrayList<>();
-        data.add("5");
-        data.add("9");
-        data.add("6");
-        data.add("7");
-        data.add("0");
+        List<TourSettingItem> data = new ArrayList<>();
+
+
         mAdapter = new TourMainSettingAdapter(data);
         mSettingRv.setAdapter(mAdapter);
     }

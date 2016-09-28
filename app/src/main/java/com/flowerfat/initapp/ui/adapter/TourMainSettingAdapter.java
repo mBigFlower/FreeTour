@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.flowerfat.initapp.R;
+import com.flowerfat.initapp.model.TourSettingItem;
 import com.flowerfat.initapp.ui.view.CheckExpandView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,15 +17,13 @@ import java.util.List;
 
 public class TourMainSettingAdapter extends RecyclerView.Adapter<TourMainSettingAdapter.MyViewHolder> {
 
-    private List<String> mDataModels;
-    private List<Integer> mHeights;
+    private List<TourSettingItem> mDataModels;
 
-    public TourMainSettingAdapter(List<String> dataModels) {
+    public TourMainSettingAdapter(List<TourSettingItem> dataModels) {
         if (dataModels == null) {
             throw new IllegalArgumentException("DataModel must not be null");
         }
         mDataModels = dataModels;
-        mHeights = new ArrayList<>();
     }
 
     @Override
@@ -37,10 +35,7 @@ public class TourMainSettingAdapter extends RecyclerView.Adapter<TourMainSetting
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        String dataModel = mDataModels.get(position);
-        if (position % 3 == 0) {
-            holder.mExpandLayout.setExpand(false);
-        }
+        holder.mExpandLayout.setup(mDataModels.get(position));
     }
 
     @Override

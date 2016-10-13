@@ -7,10 +7,10 @@ import android.widget.TextView;
 
 import com.flowerfat.initapp.R;
 import com.flowerfat.initapp.base.BaseFragment;
-import com.flowerfat.initapp.model.TourSettingItem;
 import com.flowerfat.initapp.ui.adapter.TourMainSettingAdapter;
+import com.flowerfat.initapp.utils.GsonUtil;
+import com.flowerfat.initapp.utils.SpManager;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -46,9 +46,8 @@ public class TourMainFragment extends BaseFragment {
         mSettingRv.setLayoutManager(new StaggeredGridLayoutManager(2,
                 StaggeredGridLayoutManager.VERTICAL));
 
-        List<TourSettingItem> data = new ArrayList<>();
-
-
+        String content = SpManager.getInstance(getContext()).getString(SpManager.SP_TOUR_SETTING_LIST);
+        List<String> data = GsonUtil.fromJsonList(content);
         mAdapter = new TourMainSettingAdapter(data);
         mSettingRv.setAdapter(mAdapter);
     }

@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.flowerfat.initapp.ui.view.CheckExpandView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_tour_main_expandlayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:padding="3dp">
+    android:layout_margin="3dp"/>
 
-    <com.flowerfat.initapp.ui.view.CheckExpandView
-        android:id="@+id/item_tour_main_expandlayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#aaa"/>
-
-</LinearLayout>

@@ -41,7 +41,6 @@ public abstract class ExpandLayout extends FrameLayout {
     public abstract void main();
 
 
-
     private void init() {
         initTitle();
         initExpandLayout();
@@ -80,7 +79,7 @@ public abstract class ExpandLayout extends FrameLayout {
         return isExpand;
     }
 
-    public void setExpand(boolean isExpand){
+    public void setExpand(boolean isExpand) {
         this.isExpand = isExpand;
         expandView.setVisibility(isExpand ? View.VISIBLE : View.GONE);
     }

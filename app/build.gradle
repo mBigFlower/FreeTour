@@ -36,6 +36,8 @@ dependencies {
     // 下面两个是butterknife的
     compile rootProject.ext.libButterknife
     apt rootProject.ext.libButterknifeCompiler
+    // gson
+    compile rootProject.ext.libGson
     // Dagger2
     compile rootProject.ext.libDagger
     apt rootProject.ext.libDaggerCompiler
@@ -48,6 +50,7 @@ dependencies {
     debugCompile rootProject.ext.libLeakCanaryDebug
     releaseCompile rootProject.ext.libLeakCanaryRelease
     testCompile rootProject.ext.libLeakCanaryTest
+
     compile project(':tomorrow')
 
     testCompile rootProject.ext.libRobolectric

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.flowerfat.initapp.R;
-import com.flowerfat.initapp.model.TourSettingItem;
 import com.flowerfat.initapp.ui.view.CheckExpandView;
 
 import java.util.List;
@@ -17,9 +16,9 @@ import java.util.List;
 
 public class TourMainSettingAdapter extends RecyclerView.Adapter<TourMainSettingAdapter.MyViewHolder> {
 
-    private List<TourSettingItem> mDataModels;
+    private List<String> mDataModels;
 
-    public TourMainSettingAdapter(List<TourSettingItem> dataModels) {
+    public TourMainSettingAdapter(List<String> dataModels) {
         if (dataModels == null) {
             throw new IllegalArgumentException("DataModel must not be null");
         }

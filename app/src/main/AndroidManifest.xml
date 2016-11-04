@@ -16,12 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.feedback.FeedbackActivity"
-            android:label="@string/act_name_feedback"/>
-        <activity android:name=".ui.aboutus.AboutUsActivity"
-            android:label="@string/act_name_aboutus"/>
-        <activity android:name=".ui.history.HistoryActivity"
-            android:label="@string/act_name_history"/>
+        <activity
+            android:name=".ui.feedback.FeedbackActivity"
+            android:label="@string/act_name_feedback" />
+        <activity
+            android:name=".ui.aboutus.AboutUsActivity"
+            android:label="@string/act_name_aboutus" />
+        <activity android:name=".ui.history.HistoryActivity" />
+        <activity android:name=".temp.TourDayActivity"></activity>
     </application>
 
 </manifest>

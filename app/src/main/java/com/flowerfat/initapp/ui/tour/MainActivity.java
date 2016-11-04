@@ -1,16 +1,17 @@
 package com.flowerfat.initapp.ui.tour;
 
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.flowerfat.initapp.AppComponent;
 import com.flowerfat.initapp.R;
+import com.flowerfat.initapp.temp.TourDayActivity;
 import com.flowerfat.initapp.base.BaseDaggerActivity;
 import com.flowerfat.initapp.ui.aboutus.AboutUsActivity;
 import com.flowerfat.initapp.ui.adapter.ViewPagerAdapter;
@@ -70,7 +71,6 @@ public class MainActivity extends BaseDaggerActivity implements
     public void main() {
         super.main();
 
-        setSupportActionBar(mToolbar);
         setupDrawLayout();
         setupViewPager();
 
@@ -82,10 +82,15 @@ public class MainActivity extends BaseDaggerActivity implements
      * 初始化DrawLayout及左上角
      */
     private void setupDrawLayout() {
-        final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        ab.setDisplayHomeAsUpEnabled(true);
+
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupDrawerContent(mNavigationView);
+
+        CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle("FreeTour");
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -97,7 +102,7 @@ public class MainActivity extends BaseDaggerActivity implements
      */
     private void setupViewPager() {
         mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        mAdapter.addFragment(new TourMainFragment(), "Default");
+        mAdapter.addFragment(new TourMainFragment(), "Settings");
 
         mViewPager.setAdapter(mAdapter);
     }
@@ -149,7 +154,7 @@ public class MainActivity extends BaseDaggerActivity implements
                 HistoryActivity.launch(this);
                 break;
             case R.id.nav_setting:
-
+                TourDayActivity.launch(this);
                 break;
             case R.id.nav_aboutus:
                 AboutUsActivity.launch(this);

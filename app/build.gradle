@@ -33,6 +33,7 @@ dependencies {
     compile rootProject.ext.libSupportAppcompat
     compile rootProject.ext.libSupportDesign
     compile rootProject.ext.libSupportCardView
+    compile rootProject.ext.libSupportRecyclerview
     // 下面两个是butterknife的
     compile rootProject.ext.libButterknife
     apt rootProject.ext.libButterknifeCompiler
@@ -60,4 +61,6 @@ dependencies {
 
     compile rootProject.ext.libDatePicker
 
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta2'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
 }

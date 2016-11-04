@@ -3,6 +3,8 @@ package com.flowerfat.initapp.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.flowerfat.initapp.InitApplication;
+
 /**
  * Created by 明明大美女 on 2016/5/12.
  * TODO
@@ -16,15 +18,15 @@ public class SpManager {
 
     private SharedPreferences mSP;
 
-    public SpManager(Context context) {
-        mSP = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
+    public SpManager() {
+        mSP = InitApplication.get().getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
     }
 
-    public static SpManager getInstance(Context context) {
+    public static SpManager getInstance() {
         if (sInstance == null) {
             synchronized (SpManager.class) {
                 if (sInstance == null) {
-                    sInstance = new SpManager(context);
+                    sInstance = new SpManager();
                 }
             }
         }

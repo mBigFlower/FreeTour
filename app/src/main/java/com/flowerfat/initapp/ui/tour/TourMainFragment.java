@@ -1,6 +1,5 @@
 package com.flowerfat.initapp.ui.tour;
 
-import android.app.DatePickerDialog;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.widget.TextView;
@@ -11,7 +10,6 @@ import com.flowerfat.initapp.ui.adapter.TourMainSettingAdapter;
 import com.flowerfat.initapp.utils.GsonUtil;
 import com.flowerfat.initapp.utils.SpManager;
 
-import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -46,7 +44,7 @@ public class TourMainFragment extends BaseFragment {
         mSettingRv.setLayoutManager(new StaggeredGridLayoutManager(2,
                 StaggeredGridLayoutManager.VERTICAL));
 
-        String content = SpManager.getInstance(getContext()).getString(SpManager.SP_TOUR_SETTING_LIST);
+        String content = SpManager.getInstance().getString(SpManager.SP_TOUR_SETTING_LIST);
         List<String> data = GsonUtil.fromJsonList(content);
         mAdapter = new TourMainSettingAdapter(data);
         mSettingRv.setAdapter(mAdapter);
@@ -54,17 +52,8 @@ public class TourMainFragment extends BaseFragment {
 
     @OnClick(R.id.tour_main_date)
     void toPrepareAct() {
-//        ChoicePopup choicePopup = new ChoicePopup(getContext());
+//        TestPopup choicePopup = new TestPopup(getContext());
 //        choicePopup.showAsDropDown(mDateTv);
-        Calendar now = Calendar.getInstance();
-        DatePickerDialog dpd = new DatePickerDialog(
-                getActivity(), (view, year, monthOfYear, dayOfMonth) -> {
-            mDateTv.setText(year + " " + monthOfYear + " " + dayOfMonth);
-        },
-                now.get(Calendar.YEAR),
-                now.get(Calendar.MONTH),
-                now.get(Calendar.DAY_OF_MONTH)
-        );
-        dpd.show();
+
     }
 }

@@ -70,7 +70,7 @@ public class CheckExpandView extends ExpandLayout implements View.OnClickListene
     public void setup(String itemTitle) {
         titleKey = itemTitle;
         // 通过title，获取数据
-        String spData = SpManager.getInstance(getContext()).getString(itemTitle);
+        String spData = SpManager.getInstance().getString(itemTitle);
         items = GsonUtil.fromJsonHashMap(spData);
         if (items == null)
             return;
@@ -109,7 +109,7 @@ public class CheckExpandView extends ExpandLayout implements View.OnClickListene
         // 当点击时，更新sp数据
         CheckBox checkBox = (CheckBox) v;
         items.put(checkBox.getText().toString(), checkBox.isChecked());
-        SpManager.getInstance(getContext()).put(titleKey, GsonUtil.toJson(items));
+        SpManager.getInstance().put(titleKey, GsonUtil.toJson(items));
         // 更新完成数
         if (checkBox.isChecked())
             completedNumber++;

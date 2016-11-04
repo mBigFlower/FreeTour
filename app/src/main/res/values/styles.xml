@@ -9,6 +9,14 @@
     </style>
 
     <style name="Theme.Tour" parent="Base.AppTheme">
+        <!-- 左边箭头 -->
+        <item name="drawerArrowStyle">@style/left_Drawer_Arrow_Style</item>
     </style>
 
+
+    <!--toolbar左侧图标的颜色（返回箭头）-->
+    <style name="left_Drawer_Arrow_Style" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
 </resources>

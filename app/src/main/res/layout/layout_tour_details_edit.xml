@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingLeft="36dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical">
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/tour_details_edit_titleEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:met_floatingLabel="normal"
+        app:met_singleLineEllipsis="true"
+        android:hint="Title" />
+
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/tour_details_edit_addressEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:met_floatingLabel="normal"
+        app:met_singleLineEllipsis="true"
+        android:hint="Address" />
+
+
+</LinearLayout>

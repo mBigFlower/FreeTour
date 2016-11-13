@@ -10,7 +10,12 @@ public class TourDetail {
     private String time;
     private String address;
     private String phone;
+    private String desctription;
     private int type;
+
+    public TourDetail() {
+        title = time = address = phone = desctription = "";
+    }
 
     public String getTitle() {
         return title;
@@ -52,6 +57,14 @@ public class TourDetail {
         this.type = type;
     }
 
+    public String getDesctription() {
+        return desctription;
+    }
+
+    public void setDesctription(String desctription) {
+        this.desctription = desctription;
+    }
+
     @Override
     public String toString() {
         return "TourDetail{" +
@@ -59,6 +72,7 @@ public class TourDetail {
                 ", time='" + time + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
+                ", desctription='" + desctription + '\'' +
                 ", type=" + type +
                 '}';
     }

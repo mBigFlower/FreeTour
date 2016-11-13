@@ -23,7 +23,7 @@
             android:name=".ui.aboutus.AboutUsActivity"
             android:label="@string/act_name_aboutus" />
         <activity android:name=".ui.history.HistoryActivity" />
-        <activity android:name=".temp.TourDayActivity"></activity>
+        <activity android:name=".ui.tourday.TourDayActivity"></activity>
     </application>
 
 </manifest>

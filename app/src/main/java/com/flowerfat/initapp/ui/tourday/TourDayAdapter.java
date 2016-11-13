@@ -1,4 +1,4 @@
-package com.flowerfat.initapp.temp;
+package com.flowerfat.initapp.ui.tourday;
 
 import android.support.annotation.LayoutRes;
 import android.view.ViewGroup;
@@ -22,6 +22,9 @@ import butterknife.BindView;
 public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourDeatilsViewHolder> {
 
 
+    public TourDayAdapter() {
+
+    }
     public TourDayAdapter(List<TourDetail> data) {
         this.data = data;
     }
@@ -49,6 +52,8 @@ public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourD
         TextView titleTv;
         @BindView(R.id.item_time_axis_addr)
         TextView addressTv;
+        @BindView(R.id.item_time_axis_desc)
+        TextView descriptionTv;
         @BindView(R.id.item_time_axis_more)
         ImageView moreIv;
 
@@ -61,6 +66,7 @@ public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourD
             titleTv.setText(data.getTitle());
             timeTv.setText(data.getTime());
             addressTv.setText(data.getAddress());
+            descriptionTv.setText(data.getDesctription());
             if ((position & 1) == 1) {
                 itemView.setBackgroundColor(0xFFF3F3F3);
             }

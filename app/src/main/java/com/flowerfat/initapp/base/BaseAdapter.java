@@ -2,6 +2,7 @@ package com.flowerfat.initapp.base;
 
 import android.support.v7.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
 
 public abstract class BaseAdapter<M, VH extends BaseViewHolder> extends RecyclerView.Adapter<VH> {
 
-    protected List<M> data;
+    protected List<M> data = new ArrayList<M>();
     protected OnClickListener onClickListener;
 
     @Override
@@ -34,5 +35,22 @@ public abstract class BaseAdapter<M, VH extends BaseViewHolder> extends Recycler
 
     public M getData(int position) {
         return data.get(position);
+    }
+
+    public List<M> addItem(M item){
+        data.add(item);
+        notifyItemInserted(data.size());
+        return data ;
+    }
+
+    public List<M> addAll(List<M> data){
+        this.data.addAll(data);
+        notifyDataSetChanged();
+        return this.data ;
+    }
+
+    public void clear(){
+        this.data.clear();
+        notifyDataSetChanged();
     }
 }

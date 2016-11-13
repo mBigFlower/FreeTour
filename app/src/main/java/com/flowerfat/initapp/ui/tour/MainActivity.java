@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import com.flowerfat.initapp.AppComponent;
 import com.flowerfat.initapp.R;
-import com.flowerfat.initapp.temp.TourDayActivity;
+import com.flowerfat.initapp.ui.tourday.TourDayActivity;
 import com.flowerfat.initapp.base.BaseDaggerActivity;
 import com.flowerfat.initapp.ui.aboutus.AboutUsActivity;
 import com.flowerfat.initapp.ui.adapter.ViewPagerAdapter;

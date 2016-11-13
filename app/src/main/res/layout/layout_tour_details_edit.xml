@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="8dp"
     android:paddingLeft="36dp"
     android:paddingRight="16dp"
     android:orientation="vertical">
@@ -23,6 +24,26 @@
         app:met_floatingLabel="normal"
         app:met_singleLineEllipsis="true"
         android:hint="Address" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/tour_details_edit_descriptionEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:met_floatingLabel="normal"
+        app:met_singleLineEllipsis="true"
+        android:hint="Description" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="time"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>

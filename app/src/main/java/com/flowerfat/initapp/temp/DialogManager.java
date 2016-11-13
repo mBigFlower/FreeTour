@@ -20,7 +20,7 @@ public class DialogManager<T> {
     private AlertDialog.Builder mBuilder;
     protected View customView;
 
-    private boolean isPosButtonCancelable;
+    private boolean isPosButtonAutoCancel;
 
     public DialogManager(Context context) {
         mBuilder = new AlertDialog.Builder(context);
@@ -43,6 +43,12 @@ public class DialogManager<T> {
         return setView(view, false);
     }
 
+    /**
+     * 在设置自定义View的时候，可选择是否使用butterKnife
+     * @param layoutResId
+     * @param isButterKnife
+     * @return
+     */
     public DialogManager setView(int layoutResId, boolean isButterKnife) {
         return setView(LayoutInflater.from(mBuilder.getContext()).inflate(layoutResId, null), isButterKnife);
     }
@@ -59,8 +65,14 @@ public class DialogManager<T> {
         return addPositiverButton(text, true);
     }
 
-    public DialogManager addPositiverButton(CharSequence text, boolean isPosButtonCancelable) {
-        setPositonButtonCancelable(isPosButtonCancelable);
+    /**
+     * 在设置button的时候，可选择：点击button是否自动取消Dialog
+     * @param text
+     * @param isPosButtonAutoCancel
+     * @return
+     */
+    public DialogManager addPositiverButton(CharSequence text, boolean isPosButtonAutoCancel) {
+        setPositonButtonCancelable(isPosButtonAutoCancel);
         mBuilder.setPositiveButton(text, (dialog, which) -> {
             T data = positiveClick();
             if (listener != null && data != null) {
@@ -140,17 +152,17 @@ public class DialogManager<T> {
     /**
      * 设置这个的目的：有些时候，我们要对dialog中的输入进行判断，如果判断失败，则不取消dialog
      *
-     * @param isPosButtonCancelable
+     * @param isPosButtonAutoCancel
      */
-    public void setPositonButtonCancelable(boolean isPosButtonCancelable) {
-        this.isPosButtonCancelable = isPosButtonCancelable;
+    public void setPositonButtonCancelable(boolean isPosButtonAutoCancel) {
+        this.isPosButtonAutoCancel = isPosButtonAutoCancel;
     }
 
     /**
      * 当dialog显示的时候，判断是否需要禁用 button的点击消失
      */
     public void doPosButtonCancelable() {
-        if (!isPosButtonCancelable) {
+        if (!isPosButtonAutoCancel) {
             mDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
                 T data = positiveClick();
                 if (listener != null && data != null) {

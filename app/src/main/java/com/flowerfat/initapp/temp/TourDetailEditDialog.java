@@ -1,13 +1,18 @@
 package com.flowerfat.initapp.temp;
 
-import android.content.Context;
+import android.app.Activity;
 import android.text.TextUtils;
+import android.widget.TextView;
 
 import com.flowerfat.initapp.R;
 import com.flowerfat.initapp.model.TourDetail;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+
+import java.util.Calendar;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by 明明大美女 on 2016/11/4.
@@ -21,11 +26,16 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
     MaterialEditText addressEt;
     @BindView(R.id.tour_details_edit_descriptionEt)
     MaterialEditText descriptionEt;
+    @BindView(R.id.tour_details_edit_time)
+    TextView timeTv;
 
     TourDetail tourDetail;
 
-    public TourDetailEditDialog(Context context, TourDetail tourDetail) {
+    private Activity mContext;
+
+    public TourDetailEditDialog(Activity context, TourDetail tourDetail) {
         super(context);
+        mContext = context;
         if (tourDetail == null)
             this.tourDetail = new TourDetail();
         else
@@ -38,7 +48,7 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
         this.setTitle("add a item")
                 .setView(R.layout.layout_tour_details_edit, true)
                 .addPositiverButton("sure", false)
-                .addNegativeButton("cancel")
+                .addNegativeButton("delete")
                 .addOnCancelListener();
     }
 
@@ -48,6 +58,8 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
         titleEt.setText(tourDetail.getTitle());
         addressEt.setText(tourDetail.getAddress());
         descriptionEt.setText(tourDetail.getDesctription());
+        if (tourDetail.getTime().length() > 0)
+            timeTv.setText(tourDetail.getTime());
         // 让titleEt获得焦点
         titleEt.requestFocus();
         // 让光标在最后的位置
@@ -87,5 +99,33 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
         tourDetail.setTitle(titleStr);
         tourDetail.setDesctription(descStr);
         return true;
+    }
+
+    @OnClick(R.id.tour_details_edit_time)
+    void editTime() {
+        Calendar now = Calendar.getInstance();
+        TimePickerDialog tpd = TimePickerDialog.newInstance((view, hourOfDay, minute, second) -> {
+                    String time = makeTimeBeauty(hourOfDay, minute);
+                    tourDetail.setTime(time);
+                    timeTv.setText(time);
+                },
+                now.get(Calendar.HOUR),
+                now.get(Calendar.MINUTE),
+                false
+        );
+        tpd.show(mContext.getFragmentManager(), "TimeChoose");
+    }
+
+    private String makeTimeBeauty(int hour, int minute) {
+        String time = hour + ":";
+        if (hour < 10)
+            time = "0" + time;
+
+        if (minute < 10)
+            time = time + "0" + minute;
+        else
+            time = time + minute;
+
+        return time;
     }
 }

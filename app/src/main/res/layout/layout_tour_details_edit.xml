@@ -1,49 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingTop="8dp"
+    android:orientation="vertical"
     android:paddingLeft="36dp"
     android:paddingRight="16dp"
-    android:orientation="vertical">
+    android:paddingTop="8dp">
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/tour_details_edit_titleEt"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:met_floatingLabel="normal"
-        app:met_singleLineEllipsis="true"
-        android:hint="Title" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/tour_details_edit_titleEt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Title"
+            app:met_floatingLabel="normal"
+            app:met_singleLineEllipsis="true" />
+
+        <TextView
+            android:id="@+id/tour_details_edit_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="6dp"
+            android:drawableRight="@drawable/ic_access_time_ltgrey_18dp"
+            android:gravity="right"
+            android:layout_marginBottom="4dp"
+            android:padding="3dp"
+            android:text="time set" />
+
+    </LinearLayout>
 
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/tour_details_edit_addressEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Address"
         app:met_floatingLabel="normal"
-        app:met_singleLineEllipsis="true"
-        android:hint="Address" />
+        app:met_singleLineEllipsis="true" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/tour_details_edit_descriptionEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Description"
         app:met_floatingLabel="normal"
-        app:met_singleLineEllipsis="true"
-        android:hint="Description" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="time"/>
-
-    </LinearLayout>
+        app:met_singleLineEllipsis="true" />
 
 
 </LinearLayout>

@@ -73,6 +73,8 @@ public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourD
             if (position == 1) {
                 titleTv.setTextColor(0xFFF15A59);
                 axisView.makeChoose(true);
+            } else {
+
             }
         }
     }

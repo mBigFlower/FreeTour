@@ -42,11 +42,22 @@ public abstract class BaseAdapter<M, VH extends BaseViewHolder> extends Recycler
         notifyItemInserted(data.size());
         return data ;
     }
+    public List<M> addItem(int index, M item){
+        data.add(index, item);
+        notifyItemInserted(index);
+        return data ;
+    }
 
     public List<M> addAll(List<M> data){
         this.data.addAll(data);
         notifyDataSetChanged();
         return this.data ;
+    }
+
+    public List<M> removeItem(int position){
+        data.remove(position);
+        notifyItemRemoved(position);
+        return data ;
     }
 
     public void clear(){

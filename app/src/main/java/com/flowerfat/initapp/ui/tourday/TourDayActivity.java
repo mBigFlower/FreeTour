@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
 import com.flowerfat.initapp.AppComponent;
 import com.flowerfat.initapp.R;
@@ -14,10 +13,7 @@ import com.flowerfat.initapp.base.BaseDaggerActivity;
 import com.flowerfat.initapp.model.TourDetail;
 import com.flowerfat.initapp.temp.DialogManager;
 import com.flowerfat.initapp.temp.TourDetailEditDialog;
-import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -41,7 +37,6 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
     FloatingActionButton fab;
 
     private TourDayAdapter mAdapter;
-    private List<TourDetail> tourDetails = new ArrayList<>();
 
     public static void launch(Context startActivity) {
         startActivity.startActivity(new Intent(startActivity, TourDayActivity.class));
@@ -78,28 +73,14 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
         mRecyclerview.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerview.setAdapter(mAdapter);
         mAdapter.setOnClickListener(position -> {
-            itemEdit(position);
+            itemEditDialogShow(position);
         });
     }
 
     @OnClick(R.id.fab)
     void fabClick(View view) {
-        view.animate().alpha(0).setDuration(300).start();
-        TourDetailEditDialog dialogManager = new TourDetailEditDialog(this, null);
-        dialogManager.setDialogListener(new DialogManager.OnDialogListener<TourDetail>() {
-            @Override
-            public void onSure(TourDetail data) {
-                // 这个adapter还真是方便
-                mAdapter.addItem(data);
-                view.animate().alpha(1).setDuration(300).start();
-                timeDialogShow();
-            }
-
-            @Override
-            public void onCancel() {
-                view.animate().alpha(1).setDuration(300).start();
-            }
-        });
+        hideFab();
+        itemAddDialogShow();
     }
 
     @Override
@@ -110,21 +91,12 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
 
     @Override
     public void timeDialogShow() {
-        Calendar now = Calendar.getInstance();
-        TimePickerDialog tpd = TimePickerDialog.newInstance((view, hourOfDay, minute, second) -> {
-                    Toast.makeText(this, hourOfDay + " " + minute + " " + second, Toast.LENGTH_SHORT).show();
-                },
-                now.get(Calendar.HOUR),
-                now.get(Calendar.MINUTE),
-                false
-        );
-        tpd.show(getFragmentManager(), "TimeChoose");
+
     }
 
     @Override
-    public void itemEdit(int position) {
+    public void itemEditDialogShow(int position) {
         TourDetail tourDetail = mAdapter.getData(position);
-
         TourDetailEditDialog dialogManager = new TourDetailEditDialog(this, tourDetail);
         dialogManager.setDialogListener(new DialogManager.OnDialogListener<TourDetail>() {
             @Override
@@ -135,19 +107,40 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
 
             @Override
             public void onCancel() {
-
+                mAdapter.removeItem(position);
+                presenter.deleteTourDetail(position);
             }
         });
     }
 
     @Override
-    public void itemAdd() {
+    public void itemAddDialogShow() {
+        TourDetailEditDialog dialogManager = new TourDetailEditDialog(this, null);
+        dialogManager.setDialogListener(new DialogManager.OnDialogListener<TourDetail>() {
+            @Override
+            public void onSure(TourDetail data) {
+                // 这个adapter还真是方便
+                showFab();
+                presenter.addTourDetail(data);
+            }
 
+            @Override
+            public void onCancel() {
+                showFab();
+            }
+        });
     }
 
     @Override
     public void setPresenter(TourDayContract.Presenter presenter) {
         // 这里如果使用Dagger2的话，可以不用，如果不使用Dagger2，则如下设置：
         // 额，原谅我忘了怎么弄了
+    }
+
+    public void showFab(){
+        fab.animate().alpha(1).setDuration(300).start();
+    }
+    public void hideFab(){
+        fab.animate().alpha(0).setDuration(300).start();
     }
 }

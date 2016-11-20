@@ -15,11 +15,13 @@ public interface TourDayContract {
     interface View extends BaseView<Presenter>{
         void showList(List<TourDetail> tourDetails);
         void timeDialogShow();
-        void itemEdit(int position);
-        void itemAdd();
+        void itemEditDialogShow(int position);
+        void itemAddDialogShow();
     }
 
     interface Presenter extends BasePresenter {
         void initTourDay();
+        void addTourDetail(TourDetail tourDetail);
+        void deleteTourDetail(int index);
     }
 }

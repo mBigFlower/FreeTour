@@ -30,6 +30,7 @@ public class TourDayModel {
         tourDetail.setTitle("Mark's Birthday Meal");
         tourDetail.setTime("05:00");
         tourDetail.setAddress("Mario's Restaurant");
+        tourDetail.setPhone("15828433284");
         tourDetails.add(tourDetail);
         tourDetail = new TourDetail();
         tourDetail.setTitle("Explosions In The Sky");

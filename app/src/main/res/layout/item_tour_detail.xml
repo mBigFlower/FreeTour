@@ -56,19 +56,29 @@
         android:layout_marginTop="14dp"
         android:src="@drawable/ic_more_horiz_ltgray_24dp" />
 
+    <ImageView
+        android:id="@+id/item_time_axis_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/item_time_axis_time"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="14dp"
+        android:src="@drawable/ic_phone_ltgray_24dp"
+        android:visibility="gone" />
+
 
     <TextView
         android:id="@+id/item_time_axis_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/item_time_axis_more"
-        android:layout_marginRight="28dp"
         android:layout_alignLeft="@+id/item_time_axis_time"
+        android:layout_alignParentBottom="true"
         android:layout_below="@+id/item_time_axis_time"
+        android:layout_marginRight="28dp"
+        android:layout_toLeftOf="@+id/item_time_axis_more"
         android:gravity="center_vertical"
-        android:text="High go !"
         android:paddingLeft="3dp"
+        android:text="High go !"
         android:textSize="16sp" />
 
 </RelativeLayout>

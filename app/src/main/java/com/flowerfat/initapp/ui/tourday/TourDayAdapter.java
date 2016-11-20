@@ -1,6 +1,7 @@
 package com.flowerfat.initapp.ui.tourday;
 
 import android.support.annotation.LayoutRes;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,10 +22,10 @@ import butterknife.BindView;
 
 public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourDeatilsViewHolder> {
 
-
     public TourDayAdapter() {
 
     }
+
     public TourDayAdapter(List<TourDetail> data) {
         this.data = data;
     }
@@ -38,7 +39,8 @@ public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourD
     public void onBindViewHolder(TourDeatilsViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         if (onClickListener != null) {
-            holder.moreIv.setOnClickListener(s-> onClickListener.onClick(position));
+            holder.moreIv.setOnClickListener(s -> onClickListener.onClick(position));
+            holder.phoneIv.setOnClickListener(v -> onClickListener.onClick(-1000 + position));
         }
     }
 
@@ -56,6 +58,8 @@ public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourD
         TextView descriptionTv;
         @BindView(R.id.item_time_axis_more)
         ImageView moreIv;
+        @BindView(R.id.item_time_axis_phone)
+        ImageView phoneIv;
 
         public TourDeatilsViewHolder(ViewGroup parent, @LayoutRes int resId) {
             super(parent, resId);
@@ -75,6 +79,10 @@ public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourD
                 axisView.makeChoose(true);
             } else {
 
+            }
+
+            if (data.getPhone().length() > 0) {
+                phoneIv.setVisibility(View.VISIBLE);
             }
         }
     }

@@ -53,5 +53,13 @@
         app:met_floatingLabel="normal"
         app:met_singleLineEllipsis="true" />
 
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/tour_details_edit_phoneEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone"
+        app:met_floatingLabel="normal"
+        app:met_singleLineEllipsis="true" />
+
 
 </LinearLayout>

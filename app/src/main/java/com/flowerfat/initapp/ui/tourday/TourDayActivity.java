@@ -3,6 +3,7 @@ package com.flowerfat.initapp.ui.tourday;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -26,10 +27,10 @@ import butterknife.OnClick;
  * <p>
  * Fab可以做成，滚动时隐藏，不滚动显示（几个一个）
  */
-public class TourDayActivity extends BaseDaggerActivity implements TourDayContract.View{
+public class TourDayActivity extends BaseDaggerActivity implements TourDayContract.View {
 
     @Inject
-    TourDayPresenter presenter ;
+    TourDayPresenter presenter;
 
     @BindView(R.id.oneday_recyclerview)
     RecyclerView mRecyclerview;
@@ -73,8 +74,21 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
         mRecyclerview.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerview.setAdapter(mAdapter);
         mAdapter.setOnClickListener(position -> {
-            itemEditDialogShow(position);
+            if (position > 0)
+                itemEditDialogShow(position);
+            else {
+                phoneDialogShow(position);
+            }
         });
+    }
+
+    private void phoneDialogShow(int position){
+        String phoneStr = mAdapter.getData(position + 1000).getPhone();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("是否拨打："+phoneStr)
+                .setPositiveButton("拨打", (dialog, which) -> {
+
+        }).show();
     }
 
     @OnClick(R.id.fab)
@@ -137,10 +151,11 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
         // 额，原谅我忘了怎么弄了
     }
 
-    public void showFab(){
+    public void showFab() {
         fab.animate().alpha(1).setDuration(300).start();
     }
-    public void hideFab(){
+
+    public void hideFab() {
         fab.animate().alpha(0).setDuration(300).start();
     }
 }

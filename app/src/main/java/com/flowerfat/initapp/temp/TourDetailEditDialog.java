@@ -26,6 +26,8 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
     MaterialEditText addressEt;
     @BindView(R.id.tour_details_edit_descriptionEt)
     MaterialEditText descriptionEt;
+    @BindView(R.id.tour_details_edit_phoneEt)
+    MaterialEditText phoneEt;
     @BindView(R.id.tour_details_edit_time)
     TextView timeTv;
 
@@ -48,8 +50,8 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
         this.setTitle("add a item")
                 .setView(R.layout.layout_tour_details_edit, true)
                 .addPositiverButton("sure", false)
-                .addNegativeButton("delete")
-                .addOnCancelListener();
+                .addNegativeButton("delete");
+//                .addOnCancelListener();
     }
 
     @Override
@@ -92,12 +94,13 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
         }
         String descStr = descriptionEt.getText().toString().trim();
         if (TextUtils.isEmpty(descStr)) {
-            showToast("Address should not be null");
+            showToast("Description should not be null");
             return false;
         }
         tourDetail.setAddress(addrStr);
         tourDetail.setTitle(titleStr);
         tourDetail.setDesctription(descStr);
+        tourDetail.setPhone(phoneEt.getText().toString().trim());
         return true;
     }
 

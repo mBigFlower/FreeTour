@@ -1,4 +1,4 @@
-package com.flowerfat.initapp.ui.tourday;
+package com.flowerfat.initapp.ui.history;
 
 import com.flowerfat.initapp.model.TourDetail;
 
@@ -28,15 +28,9 @@ public class TourDayModel {
         tourDetails.add(tourDetail);
         tourDetail = new TourDetail();
         tourDetail.setTitle("Mark's Birthday Meal");
-        tourDetail.setTime("05:00");
+        tourDetail.setTime("16:00");
         tourDetail.setAddress("Mario's Restaurant");
         tourDetail.setPhone("15828433284");
-        tourDetails.add(tourDetail);
-        tourDetail = new TourDetail();
-        tourDetail.setTitle("Explosions In The Sky");
-        tourDetail.setTime("08:15");
-        tourDetail.setAddress("The Roxy");
-        tourDetails.add(tourDetail);
         tourDetails.add(tourDetail);
     }
 
@@ -51,15 +45,17 @@ public class TourDayModel {
      * @return
      */
     public List<TourDetail> addTourDetail(TourDetail newTourDetail) {
+        // TODO 这里的时间不能为空，且格式要正确，不然会崩~
         int newTime = Integer.parseInt(newTourDetail.getTime().replace(":", ""));
         int size = tourDetails.size();
         for (int i = 0; i < size; i++) {
             int time = Integer.parseInt(tourDetails.get(i).getTime().replace(":", ""));
             if (newTime < time) {
                 tourDetails.add(i, newTourDetail);
-                break;
+                return tourDetails;
             }
         }
+        tourDetails.add(size, newTourDetail);
         return tourDetails;
     }
 

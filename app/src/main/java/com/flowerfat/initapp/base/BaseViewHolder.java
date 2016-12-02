@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseViewHolder<M> extends RecyclerView.ViewHolder {
 
-    protected View itemView ;
+    public View itemView ;
 
     public BaseViewHolder(ViewGroup parent, @LayoutRes int resId) {
         this(LayoutInflater.from(parent.getContext()).inflate(resId, parent, false));

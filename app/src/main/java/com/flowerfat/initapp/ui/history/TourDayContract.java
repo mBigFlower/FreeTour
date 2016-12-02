@@ -1,4 +1,4 @@
-package com.flowerfat.initapp.ui.tourday;
+package com.flowerfat.initapp.ui.history;
 
 import com.flowerfat.initapp.base.BasePresenter;
 import com.flowerfat.initapp.base.BaseView;

@@ -7,7 +7,7 @@
         android:layout_width="100dp"
         android:layout_height="160dp">
 
-        <com.flowerfat.initapp.ui.view.RevealBackgroundView
+        <com.flowerfat.initapp.ui.view.RevealBackgroundPopView
             android:id="@+id/base_animBack"
             android:layout_width="100dp"
             android:layout_height="160dp" />

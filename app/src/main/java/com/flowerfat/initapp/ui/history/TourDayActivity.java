@@ -1,12 +1,13 @@
-package com.flowerfat.initapp.ui.tourday;
+package com.flowerfat.initapp.ui.history;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.flowerfat.initapp.AppComponent;
 import com.flowerfat.initapp.R;
@@ -20,7 +21,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 这里会涉及到单个Item的更新，使用notifyItemChanged(position)即可
@@ -34,8 +34,10 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
 
     @BindView(R.id.oneday_recyclerview)
     RecyclerView mRecyclerview;
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
+//    @BindView(R.id.fab)
+//    FloatingActionButton fab;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar ;
 
     private TourDayAdapter mAdapter;
 
@@ -45,7 +47,7 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_tour_one_day;
+        return R.layout.fragment_tour_one_day;
     }
 
     @Override
@@ -56,30 +58,45 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
     }
 
     @Override
-    public void main() {
-        super.main();
-        initRecyclerView();
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         // 放这里？放到main()?
         presenter.start();
     }
 
+    @Override
+    public void main() {
+        super.main();
+        initToolbar();
+        initRecyclerView();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+
+    private void initToolbar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
     private void initRecyclerView() {
         mAdapter = new TourDayAdapter();
 
         mRecyclerview.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerview.setAdapter(mAdapter);
-        mAdapter.setOnClickListener(position -> {
-            if (position > 0)
+        mAdapter.setOnClickListener((v,position) -> {
+            if (position >= 0)
                 itemEditDialogShow(position);
             else {
                 phoneDialogShow(position);
             }
         });
+        mAdapter.setOnLongClickListener(position -> {
+            Toast.makeText(this, "Long Click", Toast.LENGTH_SHORT).show();
+        });
+        mRecyclerview.setAdapter(mAdapter);
     }
 
     private void phoneDialogShow(int position){
@@ -91,9 +108,7 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
         }).show();
     }
 
-    @OnClick(R.id.fab)
     void fabClick(View view) {
-        hideFab();
         itemAddDialogShow();
     }
 
@@ -101,6 +116,7 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
     public void showList(List<TourDetail> tourDetails) {
         mAdapter.clear();
         mAdapter.addAll(tourDetails);
+        mAdapter.detectState();
     }
 
     @Override
@@ -117,12 +133,14 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
             public void onSure(TourDetail data) {
                 // 这个adapter还真是方便
                 mAdapter.notifyItemChanged(position, data);
+                mAdapter.detectState();
             }
 
             @Override
             public void onCancel() {
                 mAdapter.removeItem(position);
                 presenter.deleteTourDetail(position);
+                mAdapter.detectState();
             }
         });
     }
@@ -134,13 +152,11 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
             @Override
             public void onSure(TourDetail data) {
                 // 这个adapter还真是方便
-                showFab();
                 presenter.addTourDetail(data);
             }
 
             @Override
             public void onCancel() {
-                showFab();
             }
         });
     }
@@ -149,13 +165,5 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
     public void setPresenter(TourDayContract.Presenter presenter) {
         // 这里如果使用Dagger2的话，可以不用，如果不使用Dagger2，则如下设置：
         // 额，原谅我忘了怎么弄了
-    }
-
-    public void showFab() {
-        fab.animate().alpha(1).setDuration(300).start();
-    }
-
-    public void hideFab() {
-        fab.animate().alpha(0).setDuration(300).start();
     }
 }

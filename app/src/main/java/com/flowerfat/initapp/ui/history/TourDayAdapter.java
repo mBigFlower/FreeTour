@@ -1,4 +1,4 @@
-package com.flowerfat.initapp.ui.tourday;
+package com.flowerfat.initapp.ui.history;
 
 import android.support.annotation.LayoutRes;
 import android.view.View;
@@ -12,6 +12,7 @@ import com.flowerfat.initapp.base.BaseViewHolder;
 import com.flowerfat.initapp.model.TourDetail;
 import com.flowerfat.initapp.ui.view.TimeAxisView;
 
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,8 +23,10 @@ import butterknife.BindView;
 
 public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourDeatilsViewHolder> {
 
-    public TourDayAdapter() {
+    private int specialPosition;
 
+    public TourDayAdapter() {
+        specialPosition = -1;
     }
 
     public TourDayAdapter(List<TourDetail> data) {
@@ -39,9 +42,34 @@ public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourD
     public void onBindViewHolder(TourDeatilsViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         if (onClickListener != null) {
-            holder.moreIv.setOnClickListener(s -> onClickListener.onClick(position));
-            holder.phoneIv.setOnClickListener(v -> onClickListener.onClick(-1000 + position));
+            holder.moreIv.setOnClickListener(v -> onClickListener.onClick(v, -1000+position));
         }
+
+        if (position == specialPosition) {
+            holder.titleTv.setTextColor(0xFFF15A59);
+            holder.axisView.makeChoose(true);
+        } else {
+            holder.titleTv.setTextColor(0xFFA4A4A4);
+            holder.axisView.makeChoose(false);
+        }
+    }
+
+    public void detectState() {
+        // 获取时间
+        int timeNow = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) * 100 + Calendar.getInstance().get(Calendar.MINUTE);
+        // 进行比对
+        int size = data.size();
+        int time;
+        for (int i = 0; i < size; i++) {
+            time = Integer.parseInt(data.get(i).getTime().replace(":", ""));
+            if (timeNow < time) {
+                specialPosition = i;
+                notifyDataSetChanged();
+                return;
+            }
+        }
+        specialPosition = size ;
+        notifyDataSetChanged();
     }
 
     public class TourDeatilsViewHolder extends BaseViewHolder<TourDetail> {
@@ -74,15 +102,11 @@ public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourD
             if ((position & 1) == 1) {
                 itemView.setBackgroundColor(0xFFF3F3F3);
             }
-            if (position == 1) {
-                titleTv.setTextColor(0xFFF15A59);
-                axisView.makeChoose(true);
-            } else {
-
-            }
 
             if (data.getPhone().length() > 0) {
                 phoneIv.setVisibility(View.VISIBLE);
+            } else {
+                phoneIv.setVisibility(View.GONE);
             }
         }
     }

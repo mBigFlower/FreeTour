@@ -62,6 +62,7 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
         descriptionEt.setText(tourDetail.getDesctription());
         if (tourDetail.getTime().length() > 0)
             timeTv.setText(tourDetail.getTime());
+        phoneEt.setText(tourDetail.getPhone());
         // 让titleEt获得焦点
         titleEt.requestFocus();
         // 让光标在最后的位置
@@ -97,10 +98,19 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
             showToast("Description should not be null");
             return false;
         }
+        String phoneStr = phoneEt.getText().toString().trim();
+        if (phoneStr.length() > 0 && phoneStr.length() < 7) {
+            showToast("Please input the right phone");
+            return false;
+        }
+        if(TextUtils.isEmpty(tourDetail.getTime())) {
+            showToast("Please choose the time");
+            return false;
+        }
         tourDetail.setAddress(addrStr);
         tourDetail.setTitle(titleStr);
         tourDetail.setDesctription(descStr);
-        tourDetail.setPhone(phoneEt.getText().toString().trim());
+        tourDetail.setPhone(phoneStr);
         return true;
     }
 
@@ -112,7 +122,7 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
                     tourDetail.setTime(time);
                     timeTv.setText(time);
                 },
-                now.get(Calendar.HOUR),
+                now.get(Calendar.HOUR_OF_DAY),
                 now.get(Calendar.MINUTE),
                 false
         );

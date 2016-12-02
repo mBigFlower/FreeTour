@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/btnRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_container_shadow"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/view_popup_call_bt"
+        style="@style/ItemMoreButton"
+        android:text="Make Phone Call" />
+
+    <Button
+        android:id="@+id/view_popup_delete_bt"
+        style="@style/ItemMoreButton"
+        android:text="Delete This" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eeeeee" />
+
+    <Button
+        android:id="@+id/view_popup_cancel_bt"
+        style="@style/ItemMoreButton"
+        android:text="CANCEL" />
+
+</LinearLayout>

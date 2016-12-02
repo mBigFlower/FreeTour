@@ -61,7 +61,7 @@ public class CheckExpandView extends ExpandLayout implements View.OnClickListene
             @Override
             public boolean onLongClick(View v) {
                 TourSettingItemPopup popup = new TourSettingItemPopup(getContext());
-                popup.showAsDropDown(v);
+//                popup.showAsDropDown(v); TODO
                 return true;
             }
         });

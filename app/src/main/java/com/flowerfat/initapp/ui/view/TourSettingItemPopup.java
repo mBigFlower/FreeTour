@@ -31,6 +31,11 @@ public class TourSettingItemPopup extends BaseAnimPopup implements View.OnLongCl
     }
 
     @Override
+    protected void animStart() {
+
+    }
+
+    @Override
     public int initLayout() {
         return R.layout.layout_setting_item;
     }

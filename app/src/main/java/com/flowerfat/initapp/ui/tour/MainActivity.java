@@ -6,17 +6,22 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.flowerfat.initapp.AppComponent;
 import com.flowerfat.initapp.R;
-import com.flowerfat.initapp.ui.tourday.TourDayActivity;
 import com.flowerfat.initapp.base.BaseDaggerActivity;
 import com.flowerfat.initapp.ui.aboutus.AboutUsActivity;
 import com.flowerfat.initapp.ui.adapter.ViewPagerAdapter;
 import com.flowerfat.initapp.ui.feedback.FeedbackActivity;
 import com.flowerfat.initapp.ui.history.HistoryActivity;
+import com.flowerfat.initapp.ui.history.TourDayActivity;
+import com.flowerfat.initapp.ui.toursetting.TourSettingActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -49,6 +54,10 @@ public class MainActivity extends BaseDaggerActivity implements
     TabLayout mTabLayout;
     @BindView(R.id.nav_view)
     NavigationView mNavigationView;
+    @BindView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbar;
+    @BindView(R.id.main_tour_top_layout)
+    LinearLayout mTopLayout ;
 
     ViewPagerAdapter mAdapter;
 
@@ -65,7 +74,6 @@ public class MainActivity extends BaseDaggerActivity implements
                 .build()
                 .inject(this);
     }
-
 
     @Override
     public void main() {
@@ -88,9 +96,7 @@ public class MainActivity extends BaseDaggerActivity implements
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupDrawerContent(mNavigationView);
 
-        CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("FreeTour");
+        collapsingToolbar.setTitle("Tour Title");
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -102,17 +108,22 @@ public class MainActivity extends BaseDaggerActivity implements
      */
     private void setupViewPager() {
         mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        mAdapter.addFragment(new TourMainFragment(), "Settings");
+        mAdapter.addFragment(new TourDayFragment(), "Day0");
 
         mViewPager.setAdapter(mAdapter);
     }
 
     @OnClick(R.id.fab)
     void add() {
-        mAdapter.addFragment(new TourFragment(), "Day " + mAdapter.getCount());
+        mAdapter.addFragment(new TourDayFragment(), "Day " + mAdapter.getCount());
         mAdapter.notifyDataSetChanged();
         // 增加一页后，跳转到该新页面
         mViewPager.setCurrentItem(mAdapter.getCount());
+    }
+
+    @OnClick(R.id.main_tour_top_layout)
+    void editTour(){
+        Toast.makeText(this, "Yeah", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -121,9 +132,26 @@ public class MainActivity extends BaseDaggerActivity implements
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            case R.id.main_setting:
+                TourSettingActivity.launch(this);
+                return true;
+            case R.id.main_add_one_day:
+                add();
+                return true;
+            case R.id.main_complete:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("确定完成本次旅行？")
+                        .setPositiveButton("确定", (dialog, which) -> {
+                            Toast.makeText(this, "Complete this tour", Toast.LENGTH_SHORT).show();
+                        }).show();
+                return true;
+            default:
+                Toast.makeText(this, "Click Default", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -166,4 +194,11 @@ public class MainActivity extends BaseDaggerActivity implements
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
 }

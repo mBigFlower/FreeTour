@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Title"
+            android:layout_marginRight="12dp"
             app:met_floatingLabel="normal"
             app:met_singleLineEllipsis="true" />
 
@@ -27,7 +28,7 @@
             android:id="@+id/tour_details_edit_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="6dp"
+            android:drawablePadding="9dp"
             android:drawableRight="@drawable/ic_access_time_ltgrey_18dp"
             android:gravity="right"
             android:layout_marginBottom="4dp"
@@ -58,6 +59,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Phone"
+        android:maxLength="15"
+        android:inputType="number"
         app:met_floatingLabel="normal"
         app:met_singleLineEllipsis="true" />
 

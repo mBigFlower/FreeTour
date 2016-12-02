@@ -17,15 +17,16 @@ import android.view.animation.Interpolator;
 /**
  * Created by Miroslaw Stanek on 18.01.15.
  */
-public class RevealBackgroundView extends View {
+public class RevealBackgroundPopView extends View {
     public static final int STATE_NOT_STARTED = 0;
     public static final int STATE_FILL_STARTED = 1;
-    public static final int STATE_FINISHED = 2;
-    public static final int STATE_ACT_FINISH = 3;
+    public static final int STATE_START_FINISHED = 2;
+    public static final int STATE_END_FINISHED = 3;
+    public static final int STATE_ACT_FINISH = 4;
 
     private static final Interpolator INTERPOLATOR = new AccelerateInterpolator();
-    private static final int FILL_TIME = 400;
-    private static final int DELAY_TIME = 400;
+    public static final int FILL_TIME = 400;
+    private static final int DELAY_TIME = 100;
 
     private int state = STATE_NOT_STARTED;
 
@@ -39,23 +40,23 @@ public class RevealBackgroundView extends View {
 
     private OnStateChangeListener onStateChangeListener;
 
-    public RevealBackgroundView(Context context) {
+    public RevealBackgroundPopView(Context context) {
         super(context);
         init();
     }
 
-    public RevealBackgroundView(Context context, AttributeSet attrs) {
+    public RevealBackgroundPopView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public RevealBackgroundView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RevealBackgroundPopView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public RevealBackgroundView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public RevealBackgroundPopView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
     }
@@ -70,17 +71,17 @@ public class RevealBackgroundView extends View {
         fillPaint.setColor(color);
     }
 
-    public void startFromLocation(int[] tapLocationOnScreen) {
+    public void startFromLocation() {
         changeState(STATE_FILL_STARTED);
-        startLocationX = tapLocationOnScreen[0];
-        startLocationY = tapLocationOnScreen[1];
+        startLocationX = getWidth();
+        startLocationY = getHeight();
         revealAnimator = ObjectAnimator.ofInt(this, "currentRadius", 0, getWidth() + getHeight()).setDuration(FILL_TIME);
         revealAnimator.setInterpolator(INTERPOLATOR);
         revealAnimator.setStartDelay(DELAY_TIME);
         revealAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                changeState(STATE_FINISHED);
+                changeState(STATE_START_FINISHED);
             }
         });
         revealAnimator.start();
@@ -94,22 +95,22 @@ public class RevealBackgroundView extends View {
         revealAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                changeState(STATE_ACT_FINISH);
+                changeState(STATE_END_FINISHED);
             }
         });
         revealAnimator.start();
     }
 
     public void setToFinishedFrame() {
-        changeState(STATE_FINISHED);
+        changeState(STATE_END_FINISHED);
         invalidate();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (state == STATE_FINISHED) {
+        if (state == STATE_START_FINISHED) {
             fillPaint.getColor();
-            canvas.drawRect(0, 0, getWidth(), getHeight(), fillPaint);
+            canvas.drawRect(0, 0, 0, 0, fillPaint);
         } else {
             canvas.drawCircle(startLocationX, startLocationY, currentRadius, fillPaint);
         }

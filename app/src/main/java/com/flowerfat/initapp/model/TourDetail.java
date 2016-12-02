@@ -10,7 +10,9 @@ public class TourDetail {
     private String time;
     private String address;
     private String phone;
+    private int money ;
     private String desctription;
+    private int trafficWay;
     private int type;
 
     public TourDetail() {

@@ -29,7 +29,8 @@ public class InitTourSettingItems {
         // 1.第一次进入 从assets中加载json文件，并将copy到个人喜好（File？SP？）
         String settingList = SpManager.getInstance().getString(SpManager.SP_TOUR_SETTING_LIST);
         if (settingList == null) {
-            RxAssets(context);
+//            RxAssets(context);
+            initLocalData(context);
         }
     }
 

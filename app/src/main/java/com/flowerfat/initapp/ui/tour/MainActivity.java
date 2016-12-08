@@ -115,10 +115,7 @@ public class MainActivity extends BaseDaggerActivity implements
 
     @OnClick(R.id.fab)
     void add() {
-        mAdapter.addFragment(new TourDayFragment(), "Day " + mAdapter.getCount());
-        mAdapter.notifyDataSetChanged();
-        // 增加一页后，跳转到该新页面
-        mViewPager.setCurrentItem(mAdapter.getCount());
+        mAdapter.getItem(mViewPager.getCurrentItem()).itemAddDialogShow();
     }
 
     @OnClick(R.id.main_tour_top_layout)
@@ -136,7 +133,7 @@ public class MainActivity extends BaseDaggerActivity implements
                 TourSettingActivity.launch(this);
                 return true;
             case R.id.main_add_one_day:
-                add();
+                addOneDay();
                 return true;
             case R.id.main_complete:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -151,6 +148,12 @@ public class MainActivity extends BaseDaggerActivity implements
         return super.onOptionsItemSelected(item);
     }
 
+    private void addOneDay(){
+        mAdapter.addFragment(new TourDayFragment(), "Day " + mAdapter.getCount());
+        mAdapter.notifyDataSetChanged();
+        // 增加一页后，跳转到该新页面
+        mViewPager.setCurrentItem(mAdapter.getCount());
+    }
 
 
     @Override

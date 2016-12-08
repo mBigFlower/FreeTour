@@ -15,6 +15,7 @@ import com.flowerfat.initapp.base.BaseDaggerActivity;
 import com.flowerfat.initapp.model.TourDetail;
 import com.flowerfat.initapp.temp.DialogManager;
 import com.flowerfat.initapp.temp.TourDetailEditDialog;
+import com.flowerfat.initapp.ui.adapter.TourDayAdapter;
 
 import java.util.List;
 

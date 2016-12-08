@@ -14,11 +14,7 @@ import butterknife.OnClick;
 
 /**
  * Created by 明明大美女 on 2016/12/2.
- * <p>
- * 这个本想弄一个炫酷点的，结果发现因为背景的关系，用RevealBackground不是很方便。
- * 回头研究下path那个层叠的，再来弄背景的。
- * <p>
- * 本例暂且先使用一个渐显的效果
+ *
  */
 
 public class TourItemMoreMenuPopup extends BasePopup {
@@ -53,6 +49,7 @@ public class TourItemMoreMenuPopup extends BasePopup {
         if (onItemClickListener != null) {
             onItemClickListener.onDeleteClick();
         }
+        dismiss();
     }
 
     @OnClick(R.id.view_popup_cancel_bt)

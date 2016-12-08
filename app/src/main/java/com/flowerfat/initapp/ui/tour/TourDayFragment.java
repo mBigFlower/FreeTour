@@ -12,7 +12,7 @@ import com.flowerfat.initapp.model.TourDetail;
 import com.flowerfat.initapp.temp.DialogManager;
 import com.flowerfat.initapp.temp.TourDetailEditDialog;
 import com.flowerfat.initapp.temp.TourItemMoreMenuPopup;
-import com.flowerfat.initapp.ui.history.TourDayAdapter;
+import com.flowerfat.initapp.ui.adapter.TourDayAdapter;
 
 import java.util.List;
 
@@ -127,7 +127,9 @@ public class TourDayFragment extends BaseFragment{
         });
     }
 
-    public void itemAddDialogShow() {
+
+
+    void itemAddDialogShow() {
         TourDetailEditDialog dialogManager = new TourDetailEditDialog(getActivity(), null);
         dialogManager.setDialogListener(new DialogManager.OnDialogListener<TourDetail>() {
             @Override

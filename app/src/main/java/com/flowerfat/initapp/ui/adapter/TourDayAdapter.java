@@ -1,7 +1,6 @@
-package com.flowerfat.initapp.ui.history;
+package com.flowerfat.initapp.ui.adapter;
 
 import android.support.annotation.LayoutRes;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -101,12 +100,6 @@ public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourD
             descriptionTv.setText(data.getDesctription());
             if ((position & 1) == 1) {
                 itemView.setBackgroundColor(0xFFF3F3F3);
-            }
-
-            if (data.getPhone().length() > 0) {
-                phoneIv.setVisibility(View.VISIBLE);
-            } else {
-                phoneIv.setVisibility(View.GONE);
             }
         }
     }

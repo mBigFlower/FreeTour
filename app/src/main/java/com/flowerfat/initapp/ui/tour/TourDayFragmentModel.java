@@ -24,7 +24,7 @@ public class TourDayFragmentModel {
         TourDetail tourDetail = new TourDetail();
         tourDetail.setTitle("Introduction");
         tourDetail.setTime("10:45");
-        tourDetail.setAddress("the destination");
+        tourDetail.setAddress("Dong Jing Hot");
         tourDetail.setDesctription("click item to revise");
         tourDetails.add(tourDetail);
         tourDetail = new TourDetail();

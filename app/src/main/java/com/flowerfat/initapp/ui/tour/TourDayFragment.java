@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.flowerfat.initapp.R;
 import com.flowerfat.initapp.base.BaseFragment;
+import com.flowerfat.initapp.base.BasePopup;
 import com.flowerfat.initapp.model.TourDetail;
 import com.flowerfat.initapp.temp.DialogManager;
 import com.flowerfat.initapp.temp.TourDetailEditDialog;
@@ -26,7 +27,7 @@ public class TourDayFragment extends BaseFragment{
     RecyclerView mRecyclerview;
 
     private TourDayAdapter mAdapter;
-    private TourDayFragmentModel mModel ;
+    private TourDayFragmentModel mModel;
 
     @Override
     protected int getLayoutResID() {
@@ -40,6 +41,7 @@ public class TourDayFragment extends BaseFragment{
         mModel = new TourDayFragmentModel();
         showList(mModel.getTourDayList());
     }
+
     private void initRecyclerView() {
         mAdapter = new TourDayAdapter();
 
@@ -57,20 +59,40 @@ public class TourDayFragment extends BaseFragment{
         mRecyclerview.setAdapter(mAdapter);
     }
 
-    private void moreDialogShow(View v, int position){
-        String phoneStr = mAdapter.getData(position + 1000).getPhone();
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//        builder.setMessage("是否拨打："+phoneStr)
-//                .setPositiveButton(拨打", (dialog, which) -> {
-//
-//                }).show();
-        new TourItemMoreMenuPopup(getActivity(), phoneStr).showAtLocation(v);
-    }
-
     public void showList(List<TourDetail> tourDetails) {
         mAdapter.clear();
         mAdapter.addAll(tourDetails);
         mAdapter.detectState();
+    }
+
+    private void moreDialogShow(View v, int position) {
+        String phoneStr = mAdapter.getData(position + 1000).getPhone();
+        TourItemMoreMenuPopup moreMenuPopup = new TourItemMoreMenuPopup(getActivity(), phoneStr);
+        moreMenuPopup.showOnAnchor(v, BasePopup.VerticalPosition.ABOVE, BasePopup.HorizontalPosition.LEFT);
+        moreMenuPopup.setOnMoreMenuItemClickListener(new TourItemMoreMenuPopup.OnMoreMenuItemClickListener() {
+            @Override
+            public void onCallClick(String phoneStr) {
+                callDialogShow(phoneStr);
+            }
+
+            @Override
+            public void onDeleteClick() {
+                deleteDialogShow(position);
+            }
+
+            @Override
+            public void onCancelClick() {
+
+            }
+        });
+    }
+
+    public void callDialogShow(String phoneStr){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("是否拨打：" + phoneStr)
+                .setPositiveButton("拨打", (dialog, which) -> {
+
+                }).show();
     }
 
     public void deleteDialogShow(int position) {
@@ -120,6 +142,4 @@ public class TourDayFragment extends BaseFragment{
         });
     }
 
-
-    ////////////////////////////////////// Model
 }

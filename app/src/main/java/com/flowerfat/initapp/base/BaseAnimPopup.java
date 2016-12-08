@@ -14,6 +14,9 @@ import com.flowerfat.initapp.ui.view.RevealBackgroundPopView;
 
 /**
  * Created by 明明大美女 on 2016/10/11.
+ *
+ * 这个类还不是很好用，以后有需要再来完善。
+ * 关于动画的方法，可以参考最下面注释的类的操作，比现在的仅仅背景渐变要好
  */
 
 public abstract class BaseAnimPopup implements RevealBackgroundPopView.OnStateChangeListener {
@@ -89,4 +92,7 @@ public abstract class BaseAnimPopup implements RevealBackgroundPopView.OnStateCh
     public View getMainView() {
         return mainView;
     }
+
+
+
 }

@@ -1,26 +1,31 @@
 package com.flowerfat.initapp.ui.adapter;
 
 import android.support.annotation.LayoutRes;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.flowerfat.initapp.R;
-import com.flowerfat.initapp.base.BaseAdapter;
+import com.flowerfat.initapp.base.BaseHeaderAdapter;
 import com.flowerfat.initapp.base.BaseViewHolder;
+import com.flowerfat.initapp.model.TourDay;
 import com.flowerfat.initapp.model.TourDetail;
+import com.flowerfat.initapp.ui.adapter.TourDayAdapter.TourDeatilsHeaderVH;
+import com.flowerfat.initapp.ui.adapter.TourDayAdapter.TourDeatilsVH;
 import com.flowerfat.initapp.ui.view.TimeAxisView;
 
 import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by 明明大美女 on 2016/11/1.
  */
 
-public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourDeatilsViewHolder> {
+public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHeaderVH, TourDeatilsVH> {
 
     private int specialPosition;
 
@@ -32,18 +37,28 @@ public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourD
         this.data = data;
     }
 
+
     @Override
-    public TourDeatilsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new TourDeatilsViewHolder(parent, R.layout.item_tour_detail);
+    public TourDeatilsHeaderVH initHeaderView(ViewGroup parent) {
+        return new TourDayAdapter.TourDeatilsHeaderVH(parent, R.layout.item_tour_detail_header);
     }
 
     @Override
-    public void onBindViewHolder(TourDeatilsViewHolder holder, int position) {
-        super.onBindViewHolder(holder, position);
-        if (onClickListener != null) {
-            holder.moreIv.setOnClickListener(v -> onClickListener.onClick(v, -1000+position));
-        }
+    public TourDeatilsVH initMainView(ViewGroup parent) {
+        return new TourDayAdapter.TourDeatilsVH(parent, R.layout.item_tour_detail);
+    }
 
+    @Override
+    public void onHeaderBindViewHolder(TourDeatilsHeaderVH holder, int position) {
+
+    }
+
+    @Override
+    public void onMainBindViewHolder(TourDeatilsVH holder, int position) {
+        // 都是监听器
+        if (onClickListener != null) {
+            holder.moreIv.setOnClickListener(v -> onClickListener.onClick(v, -1000 + position));
+        }
         if (position == specialPosition) {
             holder.titleTv.setTextColor(0xFFF15A59);
             holder.axisView.makeChoose(true);
@@ -67,11 +82,35 @@ public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourD
                 return;
             }
         }
-        specialPosition = size ;
+        specialPosition = size;
         notifyDataSetChanged();
     }
 
-    public class TourDeatilsViewHolder extends BaseViewHolder<TourDetail> {
+
+    public class TourDeatilsHeaderVH extends BaseViewHolder<TourDay> {
+
+        @BindView(R.id.item_header_content)
+        TextView contentTv;
+
+        public TourDeatilsHeaderVH(ViewGroup parent, @LayoutRes int resId) {
+            super(parent, resId);
+        }
+
+        @Override
+        public void setData(TourDay data, int position) {
+
+        }
+
+        @OnClick(R.id.item_header_hotel)
+        void change() {
+            if (contentTv.getVisibility() == View.VISIBLE) {
+                contentTv.setVisibility(View.GONE);
+            } else
+                contentTv.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public class TourDeatilsVH extends BaseViewHolder<TourDetail> {
 
         @BindView(R.id.item_time_axis_left_axis)
         TimeAxisView axisView;
@@ -88,7 +127,7 @@ public class TourDayAdapter extends BaseAdapter<TourDetail, TourDayAdapter.TourD
         @BindView(R.id.item_time_axis_phone)
         ImageView phoneIv;
 
-        public TourDeatilsViewHolder(ViewGroup parent, @LayoutRes int resId) {
+        public TourDeatilsVH(ViewGroup parent, @LayoutRes int resId) {
             super(parent, resId);
         }
 

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
@@ -35,10 +34,9 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
 
     @BindView(R.id.oneday_recyclerview)
     RecyclerView mRecyclerview;
-//    @BindView(R.id.fab)
-//    FloatingActionButton fab;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar ;
+//
+//    @BindView(R.id.toolbar)
+//    Toolbar toolbar ;
 
     private TourDayAdapter mAdapter;
 
@@ -79,8 +77,8 @@ public class TourDayActivity extends BaseDaggerActivity implements TourDayContra
     }
 
     private void initToolbar() {
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void initRecyclerView() {

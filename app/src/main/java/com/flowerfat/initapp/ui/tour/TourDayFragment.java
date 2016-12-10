@@ -77,7 +77,7 @@ public class TourDayFragment extends BaseFragment{
 
             @Override
             public void onDeleteClick() {
-                deleteDialogShow(position);
+                deleteDialogShow(position+1000);
             }
 
             @Override
@@ -119,10 +119,7 @@ public class TourDayFragment extends BaseFragment{
 
             @Override
             public void onCancel() {
-                mAdapter.removeItem(position);
-                mModel.deleteTourDetail(position);
-                showList(mModel.getTourDayList());
-                mAdapter.detectState();
+
             }
         });
     }

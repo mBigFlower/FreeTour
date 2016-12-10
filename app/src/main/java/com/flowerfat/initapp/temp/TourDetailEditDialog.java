@@ -50,7 +50,7 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
         this.setTitle("add a item")
                 .setView(R.layout.layout_tour_details_edit, true)
                 .addPositiverButton("sure", false)
-                .addNegativeButton("delete");
+                .addNegativeButton("cancel");
 //                .addOnCancelListener();
     }
 

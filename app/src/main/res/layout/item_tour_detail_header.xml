@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_container_shadow">
+
+    <TextView
+        android:id="@+id/item_header_content"
+        android:layout_width="match_parent"
+        android:layout_height="156dp"
+        android:padding="6dp"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:text="THIS is HEADER"/>
+
+
+    <TextView
+        android:id="@+id/item_header_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:text="Place : BeiJing"/>
+
+    <TextView
+        android:id="@+id/item_header_hotel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:layout_gravity="end|bottom"
+        android:text="Hotel: you can click here"/>
+</FrameLayout>

@@ -13,6 +13,9 @@ public class SpManager {
 
     private static final String SP_NAME = "init";
     public static final String SP_TOUR_SETTING_LIST = "tour_setting_list";
+    public static final String SP_TOUR_HISTORY = "tour_history";
+    public static final String SP_TOUR_NOW = "tour_now";
+    public static final String SP_IS_FIRST_TOUR = "is_first_tour";
 
     private static SpManager sInstance;
 

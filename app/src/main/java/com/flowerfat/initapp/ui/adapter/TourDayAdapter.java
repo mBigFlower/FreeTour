@@ -140,6 +140,9 @@ public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHea
             if ((position & 1) == 1) {
                 itemView.setBackgroundColor(0xFFF3F3F3);
             }
+            if(data.getTrafficWay() != 0) {
+                axisView.setAxisBitmap(data.getTrafficWay());
+            }
         }
     }
 

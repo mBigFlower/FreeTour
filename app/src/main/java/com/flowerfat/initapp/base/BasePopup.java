@@ -8,6 +8,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.PopupWindowCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import android.widget.PopupWindow;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by 明明大美女 on 2016/12/8.
  *
@@ -23,7 +26,12 @@ import java.lang.annotation.RetentionPolicy;
  *      https://github.com/kakajika/RelativePopupWindow
  * I do some change for it , which make the popup's shape is rightEnum 我做了些更改，为了布局大小正确
  *
- * Notice :the method 'BasePopup(View contentView)'  is important !
+ * Notice :
+ *  1. the method 'BasePopup(View contentView)'  is important !
+ *  2. Please sure that your layout's children are same style 请确保你布局的控件样式相同
+ *     Or use match_parent for the width 或者宽度用撑满，不然布局可能会很丑
+ *     但是，只要你用相同的item就没问题了~
+ *
  */
 
 public class BasePopup extends PopupWindow {
@@ -101,6 +109,7 @@ public class BasePopup extends PopupWindow {
         measuredLayoutH = getContentView().getMeasuredHeight();
         setWidth(measuredLayoutW);
         setHeight(measuredLayoutH);
+        Log.d(TAG, "measureLayout: width-"+measuredLayoutW +" height-"+measuredLayoutH);
     }
 
     public BasePopup init(){

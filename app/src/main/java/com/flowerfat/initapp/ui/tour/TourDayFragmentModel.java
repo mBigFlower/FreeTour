@@ -1,12 +1,12 @@
 package com.flowerfat.initapp.ui.tour;
 
+import com.flowerfat.initapp.InitApplication;
+import com.flowerfat.initapp.model.TourDay;
 import com.flowerfat.initapp.model.TourDetail;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,23 +17,12 @@ import java.util.List;
 
 public class TourDayFragmentModel {
 
-
+    private TourDay mTourDay ;
     private List<TourDetail> tourDetails = new ArrayList<>();
 
-    public TourDayFragmentModel() {
-        TourDetail tourDetail = new TourDetail();
-        tourDetail.setTitle("Introduction");
-        tourDetail.setTime("10:45");
-        tourDetail.setAddress("Dong Jing Hot");
-        tourDetail.setDesctription("click item to revise");
-        tourDetails.add(tourDetail);
-        tourDetail = new TourDetail();
-        tourDetail.setTitle("Long click to delete");
-        tourDetail.setTime("16:00");
-        tourDetail.setAddress("Mario's Restaurant");
-        tourDetail.setPhone("15828433284");
-        tourDetail.setDesctription("click right icon for more");
-        tourDetails.add(tourDetail);
+    public TourDayFragmentModel(int pageIndex) {
+        mTourDay = InitApplication.get().getTourInstance().getTourDay(pageIndex);
+        tourDetails = mTourDay.getTourDetails();
     }
 
     public List<TourDetail> getTourDayList() {
@@ -48,34 +37,40 @@ public class TourDayFragmentModel {
      */
     public List<TourDetail> addTourDetail(TourDetail newTourDetail) {
         // TODO 这里的时间不能为空，且格式要正确，不然会崩~
-        int newTime = Integer.parseInt(newTourDetail.getTime().replace(":", ""));
-        int size = tourDetails.size();
-        for (int i = 0; i < size; i++) {
-            int time = Integer.parseInt(tourDetails.get(i).getTime().replace(":", ""));
-            if (newTime < time) {
-                tourDetails.add(i, newTourDetail);
-                return tourDetails;
-            }
-        }
-        tourDetails.add(size, newTourDetail);
-        return tourDetails;
+//        int newTime = Integer.parseInt(newTourDetail.getTime().replace(":", ""));
+//        int size = tourDetails.size();
+//        for (int i = 0; i < size; i++) {
+//            int time = Integer.parseInt(tourDetails.get(i).getTime().replace(":", ""));
+//            if (newTime < time) {
+//                tourDetails.add(i, newTourDetail);
+//                return tourDetails;
+//            }
+//        }
+//        tourDetails.add(size, newTourDetail);
+        tourDetails.add(newTourDetail);
+        InitApplication.get().getTourInstance().save();
+        return getTourDayList();
     }
 
     public void deleteTourDetail(int index){
         tourDetails.remove(index);
+        InitApplication.get().getTourInstance().save();
+    }
+    public void editTourDetail(int index, TourDetail data){
+        tourDetails.set(index, data);
+        InitApplication.get().getTourInstance().save();
     }
 
     // 排序
     public class timeSort implements Comparator<TourDetail> {
         @Override
         public int compare(TourDetail detail1, TourDetail detail2) {
-            SimpleDateFormat format = new SimpleDateFormat("hh:mm");
             try {
-                Date dt1 = format.parse(detail1.getTime());
-                Date dt2 = format.parse(detail2.getTime());
-                if (dt1.getTime() > dt2.getTime()) {
+                int time1 = Integer.parseInt(detail1.getTime().replace(":", ""));
+                int time2 = Integer.parseInt(detail2.getTime().replace(":", ""));
+                if (time1 > time2) {
                     return 1;
-                } else if (dt1.getTime() < dt2.getTime()) {
+                } else if (time1 < time2) {
                     return -1;
                 } else {
                     return 0;

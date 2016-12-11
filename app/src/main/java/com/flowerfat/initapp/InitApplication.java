@@ -2,6 +2,7 @@ package com.flowerfat.initapp;
 
 import android.app.Application;
 
+import com.flowerfat.initapp.model.TourInstance;
 import com.flowerfat.initapp.utils.InitTourSettingItems;
 
 /**
@@ -11,12 +12,14 @@ public class InitApplication extends Application {
 
     private static InitApplication sInstance ;
     private AppComponent appComponent;
+    private TourInstance mTourInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         sInstance = this ;
+        mTourInstance = new TourInstance();
 
         appComponent=DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
@@ -32,4 +35,5 @@ public class InitApplication extends Application {
     public AppComponent getAppComponent() {
         return appComponent;
     }
+    public TourInstance getTourInstance() {return mTourInstance;}
 }

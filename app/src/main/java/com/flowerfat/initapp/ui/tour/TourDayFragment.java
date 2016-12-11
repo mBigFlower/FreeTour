@@ -23,6 +23,8 @@ import butterknife.BindView;
  */
 public class TourDayFragment extends BaseFragment{
 
+    public static final String PAGE_INDEX = "page_index";
+
     @BindView(R.id.oneday_recyclerview)
     RecyclerView mRecyclerview;
 
@@ -38,7 +40,7 @@ public class TourDayFragment extends BaseFragment{
     protected void main() {
         initRecyclerView();
         // 数据层
-        mModel = new TourDayFragmentModel();
+        mModel = new TourDayFragmentModel(getArguments().getInt(PAGE_INDEX));
         showList(mModel.getTourDayList());
     }
 
@@ -99,7 +101,7 @@ public class TourDayFragment extends BaseFragment{
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("是否删除该项？")
                 .setPositiveButton("删除", (dialog, which) -> {
-                    mAdapter.removeItem(position);
+//                    mAdapter.removeItem(position);
                     mModel.deleteTourDetail(position);
                     showList(mModel.getTourDayList());
                     mAdapter.detectState();
@@ -112,8 +114,8 @@ public class TourDayFragment extends BaseFragment{
         dialogManager.setDialogListener(new DialogManager.OnDialogListener<TourDetail>() {
             @Override
             public void onSure(TourDetail data) {
-                // 这个adapter还真是方便
-                mAdapter.notifyItemChanged(position, data);
+                mModel.editTourDetail(position, data);
+                showList(mModel.getTourDayList());
                 mAdapter.detectState();
             }
 

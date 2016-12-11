@@ -1,5 +1,6 @@
 package com.flowerfat.initapp.ui.tour;
 
+import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.flowerfat.initapp.AppComponent;
+import com.flowerfat.initapp.InitApplication;
 import com.flowerfat.initapp.R;
 import com.flowerfat.initapp.base.BaseDaggerActivity;
 import com.flowerfat.initapp.ui.aboutus.AboutUsActivity;
@@ -107,8 +109,11 @@ public class MainActivity extends BaseDaggerActivity implements
      * 初始化 ViewPager
      */
     private void setupViewPager() {
+        int dayNumber = InitApplication.get().getTourInstance().getTourDayNumber();
         mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        mAdapter.addFragment(new TourDayFragment(), "Day0");
+        for (int i = 0; i < dayNumber; i++) {
+            addOneDay(i);
+        }
 
         mViewPager.setAdapter(mAdapter);
     }
@@ -133,14 +138,10 @@ public class MainActivity extends BaseDaggerActivity implements
                 TourSettingActivity.launch(this);
                 return true;
             case R.id.main_add_one_day:
-                addOneDay();
+                addOneDay(mAdapter.getCount());
                 return true;
             case R.id.main_complete:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("确定完成本次旅行？")
-                        .setPositiveButton("确定", (dialog, which) -> {
-                            Toast.makeText(this, "Complete this tour", Toast.LENGTH_SHORT).show();
-                        }).show();
+                showCompleteDialog();
                 return true;
             default:
                 Toast.makeText(this, "Click Default", Toast.LENGTH_SHORT).show();
@@ -148,13 +149,29 @@ public class MainActivity extends BaseDaggerActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-    private void addOneDay(){
-        mAdapter.addFragment(new TourDayFragment(), "Day " + mAdapter.getCount());
+    /**
+     * 添加一天
+     * @param index
+     */
+    private void addOneDay(int index){
+        Bundle args = new Bundle();
+        TourDayFragment tourDayFragment = new TourDayFragment();
+        args.putInt(TourDayFragment.PAGE_INDEX, index);
+        tourDayFragment.setArguments(args);
+        mAdapter.addFragment(tourDayFragment, "Day"+index);
         mAdapter.notifyDataSetChanged();
         // 增加一页后，跳转到该新页面
         mViewPager.setCurrentItem(mAdapter.getCount());
     }
 
+    private void showCompleteDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("确定完成本次旅行？")
+                .setPositiveButton("确定", (dialog, which) -> {
+                    // TODO 单例中的改变，SP的存储
+                    Toast.makeText(this, "Complete this tour", Toast.LENGTH_SHORT).show();
+                }).show();
+    }
 
     @Override
     public void onBackPressed() {

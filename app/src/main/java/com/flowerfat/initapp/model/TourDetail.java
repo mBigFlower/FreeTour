@@ -67,15 +67,11 @@ public class TourDetail {
         this.desctription = desctription;
     }
 
-    @Override
-    public String toString() {
-        return "TourDetail{" +
-                "title='" + title + '\'' +
-                ", time='" + time + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", desctription='" + desctription + '\'' +
-                ", type=" + type +
-                '}';
+
+    public void setTrafficWay(int trafficWay) {
+        this.trafficWay = trafficWay;
+    }
+    public int getTrafficWay() {
+        return DefaultValue.TrafficWay.getTrafficWayRes(trafficWay);
     }
 }

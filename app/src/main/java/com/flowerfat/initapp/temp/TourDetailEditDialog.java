@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.flowerfat.initapp.R;
 import com.flowerfat.initapp.model.TourDetail;
+import com.flowerfat.initapp.utils.Utils;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
@@ -28,6 +29,8 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
     MaterialEditText descriptionEt;
     @BindView(R.id.tour_details_edit_phoneEt)
     MaterialEditText phoneEt;
+    @BindView(R.id.tour_details_edit_budgetEt)
+    MaterialEditText budgetEt;
     @BindView(R.id.tour_details_edit_time)
     TextView timeTv;
 
@@ -47,8 +50,7 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
     }
 
     private void init() {
-        this.setTitle("add a item")
-                .setView(R.layout.layout_tour_details_edit, true)
+        this.setView(R.layout.layout_tour_details_edit, true)
                 .addPositiverButton("sure", false)
                 .addNegativeButton("cancel");
 //                .addOnCancelListener();
@@ -64,9 +66,9 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
             timeTv.setText(tourDetail.getTime());
         phoneEt.setText(tourDetail.getPhone());
         // 让titleEt获得焦点
-        titleEt.requestFocus();
-        // 让光标在最后的位置
-        titleEt.setSelection(tourDetail.getTitle().length());
+        Utils.setEditCursorLast(titleEt);
+        if (tourDetail.getBudget() != 0)
+            budgetEt.setText(tourDetail.getBudget() + "");
     }
 
     @Override
@@ -103,7 +105,7 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
             showToast("Please input the right phone");
             return false;
         }
-        if(TextUtils.isEmpty(tourDetail.getTime())) {
+        if (TextUtils.isEmpty(tourDetail.getTime())) {
             showToast("Please choose the time");
             return false;
         }
@@ -111,6 +113,7 @@ public class TourDetailEditDialog extends DialogManager<TourDetail> {
         tourDetail.setTitle(titleStr);
         tourDetail.setDesctription(descStr);
         tourDetail.setPhone(phoneStr);
+        tourDetail.setBudget(budgetEt.getText().toString().trim());
         return true;
     }
 

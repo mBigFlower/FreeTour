@@ -24,7 +24,7 @@ public abstract class BaseAdapter<M, VH extends BaseViewHolder> extends Recycler
 
     @Override
     public int getItemCount() {
-        return data.size()+1;
+        return data.size();
     }
 
     public M getData(int position) {

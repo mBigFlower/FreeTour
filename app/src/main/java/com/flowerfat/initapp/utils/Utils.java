@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.os.Build;
 import android.view.Display;
 import android.view.WindowManager;
+import android.widget.EditText;
 
 /**
  * Created by froger_mcs on 05.11.14.
@@ -44,5 +45,10 @@ public class Utils {
 
     public static boolean isAndroid5() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    }
+
+    public static void setEditCursorLast(EditText editText){
+        editText.requestFocus();
+        editText.setSelection(editText.getText().length());
     }
 }

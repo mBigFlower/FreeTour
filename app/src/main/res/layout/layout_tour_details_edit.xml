@@ -6,7 +6,13 @@
     android:orientation="vertical"
     android:paddingLeft="36dp"
     android:paddingRight="16dp"
-    android:paddingTop="8dp">
+    android:paddingTop="8dp"
+    android:background="#0000">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_traffic_bus_ltgray_18dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Phone"
-        android:maxLength="15"
+        android:maxLength="11"
         android:inputType="number"
         app:met_floatingLabel="normal"
         app:met_singleLineEllipsis="true" />
@@ -69,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="The budget"
-        android:maxLength="15"
+        android:maxLength="5"
         android:inputType="number"
         app:met_floatingLabel="normal"
         app:met_singleLineEllipsis="true" />

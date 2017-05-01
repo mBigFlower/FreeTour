@@ -11,6 +11,10 @@
         android:title="Add a day" />
 
     <item
+        android:id="@+id/main_delete_one_day"
+        android:title="delete this day" />
+
+    <item
         android:id="@+id/main_complete"
         android:title="Complete tour" />
 </menu>

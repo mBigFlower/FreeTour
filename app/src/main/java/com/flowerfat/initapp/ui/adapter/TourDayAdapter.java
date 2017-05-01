@@ -1,6 +1,7 @@
 package com.flowerfat.initapp.ui.adapter;
 
 import android.support.annotation.LayoutRes;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,15 +29,25 @@ import butterknife.OnClick;
 public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHeaderVH, TourDeatilsVH> {
 
     private int specialPosition;
+    // the header's data
+    private String hotelStr;
+    private String placeStr;
+    private String contentStr;
 
     public TourDayAdapter() {
         specialPosition = -1;
+        hotelStr = "hotel";
     }
 
     public TourDayAdapter(List<TourDetail> data) {
         this.data = data;
     }
 
+    public TourDayAdapter(String hotelStr, String placeStr, String contentStr) {
+        this.hotelStr = hotelStr;
+        this.placeStr = placeStr;
+        this.contentStr = contentStr;
+    }
 
     @Override
     public TourDeatilsHeaderVH initHeaderView(ViewGroup parent) {
@@ -50,7 +61,8 @@ public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHea
 
     @Override
     public void onHeaderBindViewHolder(TourDeatilsHeaderVH holder, int position) {
-
+        // add the listener , and make sure the position
+        holder.contentTv.setOnClickListener(v -> onClickListener.onClick(v, 1000 + position));
     }
 
     @Override
@@ -68,6 +80,9 @@ public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHea
         }
     }
 
+    /**
+     * 更新红色的位置
+     */
     public void detectState() {
         // 获取时间
         int timeNow = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) * 100 + Calendar.getInstance().get(Calendar.MINUTE);
@@ -86,11 +101,25 @@ public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHea
         notifyDataSetChanged();
     }
 
+    public void updateHeader(String hotelStr, String placeStr, String contentStr) {
+        if (!TextUtils.isEmpty(hotelStr))
+            this.hotelStr = "Hotel: " + hotelStr;
+        if (!TextUtils.isEmpty(placeStr))
+            this.placeStr = "Place: " + placeStr;
+        if (!TextUtils.isEmpty(contentStr))
+            this.contentStr = contentStr;
+        notifyItemChanged(0);
+    }
+
 
     public class TourDeatilsHeaderVH extends BaseViewHolder<TourDay> {
 
         @BindView(R.id.item_header_content)
         TextView contentTv;
+        @BindView(R.id.item_header_hotel)
+        TextView hotelTv;
+        @BindView(R.id.item_header_place)
+        TextView placeTv;
 
         public TourDeatilsHeaderVH(ViewGroup parent, @LayoutRes int resId) {
             super(parent, resId);
@@ -98,15 +127,18 @@ public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHea
 
         @Override
         public void setData(TourDay data, int position) {
-
+            hotelTv.setText(hotelStr);
+            placeTv.setText(placeStr);
+            contentTv.setText(contentStr);
         }
 
         @OnClick(R.id.item_header_hotel)
         void change() {
             if (contentTv.getVisibility() == View.VISIBLE) {
                 contentTv.setVisibility(View.GONE);
-            } else
+            } else {
                 contentTv.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -120,6 +152,8 @@ public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHea
         TextView titleTv;
         @BindView(R.id.item_time_axis_addr)
         TextView addressTv;
+        @BindView(R.id.item_time_axis_budget)
+        TextView budgetTv;
         @BindView(R.id.item_time_axis_desc)
         TextView descriptionTv;
         @BindView(R.id.item_time_axis_more)
@@ -140,8 +174,14 @@ public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHea
             if ((position & 1) == 1) {
                 itemView.setBackgroundColor(0xFFF3F3F3);
             }
-            if(data.getTrafficWay() != 0) {
+            if (data.getTrafficWay() != 0) {
                 axisView.setAxisBitmap(data.getTrafficWay());
+            }
+            if (data.getBudget() != 0) {
+                budgetTv.setText(data.getBudget() + "");
+                budgetTv.setVisibility(View.VISIBLE);
+            } else {
+                budgetTv.setVisibility(View.INVISIBLE);
             }
         }
     }

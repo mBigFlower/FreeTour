@@ -24,7 +24,8 @@
             android:label="@string/act_name_aboutus" />
         <activity android:name=".ui.history.HistoryActivity" />
         <activity android:name=".ui.history.TourDayActivity" />
-        <activity android:name=".ui.toursetting.TourSettingActivity"></activity>
+        <activity android:name=".ui.toursetting.TourSettingActivity" />
+        <activity android:name=".temp.TestActivity"></activity>
     </application>
 
 </manifest>

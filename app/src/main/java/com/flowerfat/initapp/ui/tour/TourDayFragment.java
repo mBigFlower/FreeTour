@@ -3,14 +3,17 @@ package com.flowerfat.initapp.ui.tour;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.flowerfat.initapp.R;
 import com.flowerfat.initapp.base.BaseFragment;
 import com.flowerfat.initapp.base.BasePopup;
+import com.flowerfat.initapp.model.TourDay;
 import com.flowerfat.initapp.model.TourDetail;
 import com.flowerfat.initapp.temp.DialogManager;
 import com.flowerfat.initapp.temp.TourDetailEditDialog;
+import com.flowerfat.initapp.temp.TourHeaderDialog;
 import com.flowerfat.initapp.temp.TourItemMoreMenuPopup;
 import com.flowerfat.initapp.ui.adapter.TourDayAdapter;
 
@@ -18,10 +21,12 @@ import java.util.List;
 
 import butterknife.BindView;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by 明明大美女 on 2016/9/7.
  */
-public class TourDayFragment extends BaseFragment{
+public class TourDayFragment extends BaseFragment {
 
     public static final String PAGE_INDEX = "page_index";
 
@@ -49,7 +54,10 @@ public class TourDayFragment extends BaseFragment{
 
         mRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter.setOnClickListener((v, position) -> {
-            if (position >= 0)
+            Log.d(TAG, "initRecyclerView: " + position);
+            if (position == 1000) {
+                headerDialogShow();
+            } else if (position >= 0)
                 itemEditDialogShow(position);
             else {
                 moreDialogShow(v, position);
@@ -61,10 +69,32 @@ public class TourDayFragment extends BaseFragment{
         mRecyclerview.setAdapter(mAdapter);
     }
 
+
     public void showList(List<TourDetail> tourDetails) {
         mAdapter.clear();
+
+        mAdapter.updateHeader(mModel.getTourDay().getHotel(), mModel.getTourDay().getPlace(), "Happy New Year  !");
+
         mAdapter.addAll(tourDetails);
         mAdapter.detectState();
+    }
+
+    private void headerDialogShow() {
+        TourHeaderDialog tourHeaderDialog = new TourHeaderDialog(getActivity(), mModel.getTourDay());
+        tourHeaderDialog.setDialogListener(new DialogManager.OnDialogListener<TourDay>() {
+            @Override
+            public void onSure(TourDay tourDay) {
+                // 更新model
+                mModel.setTourDay(tourDay);
+                // 更新列表显示
+                mAdapter.updateHeader(tourDay.getHotel(), tourDay.getPlace(), "Happy New Year  !");
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
     }
 
     private void moreDialogShow(View v, int position) {
@@ -79,7 +109,7 @@ public class TourDayFragment extends BaseFragment{
 
             @Override
             public void onDeleteClick() {
-                deleteDialogShow(position+1000);
+                deleteDialogShow(position + 1000);
             }
 
             @Override
@@ -89,7 +119,7 @@ public class TourDayFragment extends BaseFragment{
         });
     }
 
-    public void callDialogShow(String phoneStr){
+    public void callDialogShow(String phoneStr) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("是否拨打：" + phoneStr)
                 .setPositiveButton("拨打", (dialog, which) -> {
@@ -125,7 +155,6 @@ public class TourDayFragment extends BaseFragment{
             }
         });
     }
-
 
 
     void itemAddDialogShow() {

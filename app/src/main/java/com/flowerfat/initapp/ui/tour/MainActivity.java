@@ -2,6 +2,7 @@ package com.flowerfat.initapp.ui.tour;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -9,8 +10,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -18,6 +21,9 @@ import com.flowerfat.initapp.AppComponent;
 import com.flowerfat.initapp.InitApplication;
 import com.flowerfat.initapp.R;
 import com.flowerfat.initapp.base.BaseDaggerActivity;
+import com.flowerfat.initapp.model.Tour;
+import com.flowerfat.initapp.temp.DialogManager;
+import com.flowerfat.initapp.temp.TourMainDialog;
 import com.flowerfat.initapp.ui.aboutus.AboutUsActivity;
 import com.flowerfat.initapp.ui.adapter.ViewPagerAdapter;
 import com.flowerfat.initapp.ui.feedback.FeedbackActivity;
@@ -50,6 +56,8 @@ public class MainActivity extends BaseDaggerActivity implements
     DrawerLayout mDrawerLayout;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.fab)
+    FloatingActionButton mFab ;
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
     @BindView(R.id.tabs)
@@ -59,7 +67,7 @@ public class MainActivity extends BaseDaggerActivity implements
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
     @BindView(R.id.main_tour_top_layout)
-    LinearLayout mTopLayout ;
+    LinearLayout mTopLayout;
 
     ViewPagerAdapter mAdapter;
 
@@ -92,13 +100,12 @@ public class MainActivity extends BaseDaggerActivity implements
      * 初始化DrawLayout及左上角
      */
     private void setupDrawLayout() {
-
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupDrawerContent(mNavigationView);
 
-        collapsingToolbar.setTitle("Tour Title");
+        collapsingToolbar.setTitle(InitApplication.get().getTourInstance().getTour().getTitle());
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -120,12 +127,31 @@ public class MainActivity extends BaseDaggerActivity implements
 
     @OnClick(R.id.fab)
     void add() {
-        mAdapter.getItem(mViewPager.getCurrentItem()).itemAddDialogShow();
+        if (mAdapter.getCount() != 0) {
+            mAdapter.getItem(mViewPager.getCurrentItem()).itemAddDialogShow();
+        }
     }
 
     @OnClick(R.id.main_tour_top_layout)
-    void editTour(){
-        Toast.makeText(this, "Yeah", Toast.LENGTH_SHORT).show();
+    void editTour() {
+        tourMainDialogShow();
+    }
+
+
+    private void tourMainDialogShow() {
+        TourMainDialog tourMainDialog = new TourMainDialog(this);
+        tourMainDialog.setDialogListener(new DialogManager.OnDialogListener<Tour>() {
+            @Override
+            public void onSure(Tour tour) {
+                Log.e("tourMainDialogShow", "onSure: " + tour.getTitle());
+                collapsingToolbar.setTitle(tour.getTitle());
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
     }
 
     @Override
@@ -140,6 +166,9 @@ public class MainActivity extends BaseDaggerActivity implements
             case R.id.main_add_one_day:
                 addOneDay(mAdapter.getCount());
                 return true;
+            case R.id.main_delete_one_day:
+                deleteThisDay(mViewPager.getCurrentItem());
+                return true;
             case R.id.main_complete:
                 showCompleteDialog();
                 return true;
@@ -151,26 +180,50 @@ public class MainActivity extends BaseDaggerActivity implements
 
     /**
      * 添加一天
+     *
      * @param index
      */
-    private void addOneDay(int index){
+    private void addOneDay(int index) {
         Bundle args = new Bundle();
         TourDayFragment tourDayFragment = new TourDayFragment();
         args.putInt(TourDayFragment.PAGE_INDEX, index);
         tourDayFragment.setArguments(args);
-        mAdapter.addFragment(tourDayFragment, "Day"+index);
+        mAdapter.addFragment(tourDayFragment, "Day" + index);
         mAdapter.notifyDataSetChanged();
         // 增加一页后，跳转到该新页面
         mViewPager.setCurrentItem(mAdapter.getCount());
+        // 若是第一次添加一天，则显示FAB
+        if(mAdapter.getCount() == 1) {
+            mFab.setVisibility(View.VISIBLE);
+        }
     }
 
+    private void deleteThisDay(int index){
+        mAdapter.deleteFragment(index);
+        // SP里数据更新
+    }
+
+    /**
+     * 完成旅行的dialog显示
+     */
     private void showCompleteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("确定完成本次旅行？")
+        builder.setMessage("确定完成本次旅行？（无法修改）")
                 .setPositiveButton("确定", (dialog, which) -> {
                     // TODO 单例中的改变，SP的存储
+                    completeTour();
                     Toast.makeText(this, "Complete this tour", Toast.LENGTH_SHORT).show();
                 }).show();
+    }
+
+    /**
+     * 完成旅行
+     */
+    private void completeTour() {
+        InitApplication.get().getTourInstance().completeTour();
+        setupViewPager();
+        // 因为清空了行程，所以这个针对某一页的FAB就隐藏
+        mFab.setVisibility(View.GONE);
     }
 
     @Override

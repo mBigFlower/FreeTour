@@ -12,7 +12,7 @@
         android:padding="6dp"
         android:textSize="24sp"
         android:gravity="center"
-        android:text="THIS is HEADER"/>
+        android:text="@string/default_header_content"/>
 
 
     <TextView
@@ -20,7 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="6dp"
-        android:text="Place : BeiJing"/>
+        android:maxLines="1"
+        android:text="@string/default_header_place"/>
 
     <TextView
         android:id="@+id/item_header_hotel"
@@ -28,5 +29,5 @@
         android:layout_height="wrap_content"
         android:padding="6dp"
         android:layout_gravity="end|bottom"
-        android:text="Hotel: you can click here"/>
+        android:text="@string/default_header_hotel"/>
 </FrameLayout>

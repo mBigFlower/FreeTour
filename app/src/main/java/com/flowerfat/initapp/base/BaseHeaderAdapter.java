@@ -55,6 +55,7 @@ public abstract class BaseHeaderAdapter<M, headerVH extends BaseViewHolder,  mai
     public void onBindViewHolder(BaseViewHolder holder, int position) {
         switch (getItemViewType(position)) {
             case TYPE_HEADER:
+                holder.setData(null, 0);
                 onHeaderBindViewHolder((headerVH)holder, position);
                 break;
             case TYPE_CELL:

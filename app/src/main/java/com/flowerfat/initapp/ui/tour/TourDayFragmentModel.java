@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * Created by 明明大美女 on 2016/11/13.
  *
- * 这里欠缺一个SP的存数据
  */
 
 public class TourDayFragmentModel {
@@ -28,6 +27,14 @@ public class TourDayFragmentModel {
     public List<TourDetail> getTourDayList() {
         Collections.sort(tourDetails, new timeSort());
         return tourDetails;
+    }
+    public TourDay getTourDay(){
+        return mTourDay;
+    }
+
+    public void setTourDay(TourDay tourDay) {
+        this.mTourDay = tourDay;
+        InitApplication.get().getTourInstance().save();
     }
 
     /**

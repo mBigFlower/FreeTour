@@ -49,7 +49,7 @@
         android:layout_alignTop="@+id/item_time_axis_addr"
         android:layout_alignBottom="@+id/item_time_axis_addr"
         android:drawableLeft="@drawable/ic_money_ltgray_18dp"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <ImageView
         android:id="@+id/item_time_axis_more"

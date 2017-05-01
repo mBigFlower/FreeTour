@@ -13,37 +13,82 @@ import java.util.List;
 public class TourInstance {
 
     private Tour mTour;
-    private List<TourDay> tourDayList = new ArrayList<>();
+    private List<TourDay> mTourDayList = new ArrayList<>();
 
     public TourInstance() {
         mTour = GsonUtil.g().fromJson(SpManager.getInstance().getString(SpManager.SP_TOUR_NOW), Tour.class);
         if (mTour == null) {
             initFirstTour();
         }
-        tourDayList = mTour.getTourDays();
+        mTourDayList = mTour.getTourDays();
     }
 
     /**
+     * 获取某一天数据
      * 如果要获取的没有，则需要新加一天，并保存
      * @param index
      * @return
      */
     public TourDay getTourDay(int index) {
-        if (index == tourDayList.size()) {
-            TourDay tourDay = new TourDay(null, null, -1, new ArrayList<>());
-            tourDayList.add(tourDay);
+        if (index == mTourDayList.size()) {
+            TourDay tourDay = new TourDay("", "", -1, new ArrayList<>());
+            mTourDayList.add(tourDay);
             save();
             return tourDay ;
         } else
-            return tourDayList.get(index);
+            return mTourDayList.get(index);
     }
 
+    public void deleteTourDay(int index){
+        mTourDayList.remove(index);
+        save();
+    }
+
+    /**
+     * 获得本次Tour中有几天
+     * @return
+     */
     public int getTourDayNumber() {
-        return tourDayList.size();
+        return mTourDayList.size();
     }
 
+    /**
+     * 保存
+     */
     public void save() {
         SpManager.getInstance().put(SpManager.SP_TOUR_NOW, GsonUtil.toJson(mTour));
+    }
+
+    /**
+     * 完成本次 Tour
+     * 1. 将本次旅行存到历史中
+     * 2. 新建一个旅行
+     */
+    public void completeTour(){
+        completeTourRepository();
+        completeTourNewTour();
+    }
+
+    /**
+     * 完成本次旅行 之 存储部分
+     */
+    private void completeTourRepository() {
+        String history = SpManager.getInstance().getString(SpManager.SP_TOUR_HISTORY);
+        List<Tour> tourList = GsonUtil.fromJsonList(history);
+        if (tourList == null) {
+            tourList = new ArrayList<>();
+        }
+        tourList.add(mTour);
+        SpManager.getInstance().put(SpManager.SP_TOUR_HISTORY, GsonUtil.toJson(tourList));
+    }
+
+    /**
+     * 完成本次旅行 之 新建一个Tour
+     */
+    private void completeTourNewTour() {
+        mTourDayList = new ArrayList<>();
+        mTour = new Tour("FreeTour", null, null, null, -1, mTourDayList);
+        save();
     }
 
     /**
@@ -67,9 +112,13 @@ public class TourInstance {
         tourDetail.setDesctription("click right icon for more");
         tourDetailList.add(tourDetail);
 
-        TourDay tourDay = new TourDay(null, null, -1, tourDetailList);
-        tourDayList.add(tourDay);
+        TourDay tourDay = new TourDay("", "", -1, tourDetailList);
+        mTourDayList.add(tourDay);
 
-        mTour = new Tour("FreeTour", null, null, null, -1, tourDayList);
+        mTour = new Tour("FreeTour", null, null, null, -1, mTourDayList);
+    }
+
+    public Tour getTour() {
+        return mTour;
     }
 }

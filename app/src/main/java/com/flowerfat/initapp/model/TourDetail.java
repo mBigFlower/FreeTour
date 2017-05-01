@@ -1,5 +1,7 @@
 package com.flowerfat.initapp.model;
 
+import android.text.TextUtils;
+
 /**
  * Created by 明明大美女 on 2016/11/1.
  */
@@ -10,7 +12,7 @@ public class TourDetail {
     private String time;
     private String address;
     private String phone;
-    private int money ;
+    private int budget;
     private String desctription;
     private int trafficWay;
     private int type;
@@ -67,10 +69,19 @@ public class TourDetail {
         this.desctription = desctription;
     }
 
+    public int getBudget() {
+        return budget;
+    }
+
+    public void setBudget(String budgetStr) {
+        if (!TextUtils.isEmpty(budgetStr))
+            this.budget = Integer.parseInt(budgetStr);
+    }
 
     public void setTrafficWay(int trafficWay) {
         this.trafficWay = trafficWay;
     }
+
     public int getTrafficWay() {
         return DefaultValue.TrafficWay.getTrafficWayRes(trafficWay);
     }

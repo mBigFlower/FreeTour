@@ -15,4 +15,7 @@
     <string name="budget">预算</string>
     <string name="weather">天气</string>
     <string name="sure">确定</string>
+    <string name="default_header_content">Click to edit this header</string>
+    <string name="default_header_place">Place : Hawaii</string>
+    <string name="default_header_hotel">Hotel: Four Seasons Resort Maui at Wailea</string>
 </resources>

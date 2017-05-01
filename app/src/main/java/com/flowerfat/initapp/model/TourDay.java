@@ -10,6 +10,7 @@ import java.util.List;
 public class TourDay {
     private String place;
     private String hotel;
+    private boolean isHeaderHiden;
     private int dayMoney;
     private List<TourDetail> tourDetails = new ArrayList<>();
 
@@ -34,6 +35,14 @@ public class TourDay {
 
     public void setHotel(String hotel) {
         this.hotel = hotel;
+    }
+
+    public boolean isHeaderHiden() {
+        return isHeaderHiden;
+    }
+
+    public void setHeaderHiden(boolean headerHiden) {
+        isHeaderHiden = headerHiden;
     }
 
     public int getDayMoney() {

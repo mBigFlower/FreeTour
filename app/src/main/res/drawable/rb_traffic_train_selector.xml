@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--drawable/btn_context_menu.xml-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_traffic_train_ltgray_18dp" android:state_focused="false" android:state_pressed="false"  android:state_checked="false"/>
+    <item android:drawable="@drawable/ic_traffic_train_pink_18dp" android:state_pressed="true" />
+    <item android:drawable="@drawable/ic_traffic_train_pink_18dp" android:state_focused="true" />
+    <item android:drawable="@drawable/ic_traffic_train_pink_18dp" android:state_checked="true" />
+</selector>

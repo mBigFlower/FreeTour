@@ -108,7 +108,7 @@ public class TourInstance {
         tourDetail.setTime("16:00");
         tourDetail.setAddress("Mario's Restaurant");
         tourDetail.setPhone("8008208820");
-        tourDetail.setTrafficWay(DefaultValue.TrafficWay.TRAFFIC_BIKE);
+        tourDetail.setTrafficWay(DefaultValue.TrafficWay.TRAFFIC_CAR);
         tourDetail.setDesctription("click right icon for more");
         tourDetailList.add(tourDetail);
 

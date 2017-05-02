@@ -40,5 +40,31 @@ public class DefaultValue {
             }
             return 0;
         }
+
+        public static int getTrafficWayRes(int trafficWay, boolean isChoosed){
+            if(isChoosed) {
+                switch (trafficWay) {
+                    case TRAFFIC_NULL:
+                        break;
+                    case TRAFFIC_PLANE:
+                        return R.drawable.ic_traffic_airplane_pink_18dp;
+                    case TRAFFIC_BUS:
+                        return R.drawable.ic_traffic_bus_pink_18dp;
+                    case TRAFFIC_BIKE:
+                        return R.drawable.ic_traffic_bike_pink_18dp;
+                    case TRAFFIC_CAR:
+                        return R.drawable.ic_traffic_car_pink_18dp;
+                    case TRAFFIC_TRAIN:
+                        return R.drawable.ic_traffic_train_pink_18dp;
+                    case TRAFFIC_TEXI: // 这个还没找图片
+                        return R.drawable.ic_traffic_car_pink_18dp;
+                    default:
+                        break;
+                }
+                return 0;
+            } else {
+                return getTrafficWayRes(trafficWay);
+            }
+        }
     }
 }

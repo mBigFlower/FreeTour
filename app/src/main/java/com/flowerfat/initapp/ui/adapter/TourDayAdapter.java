@@ -4,6 +4,7 @@ import android.support.annotation.LayoutRes;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,8 +13,7 @@ import com.flowerfat.initapp.base.BaseHeaderAdapter;
 import com.flowerfat.initapp.base.BaseViewHolder;
 import com.flowerfat.initapp.model.TourDay;
 import com.flowerfat.initapp.model.TourDetail;
-import com.flowerfat.initapp.ui.adapter.TourDayAdapter.TourDeatilsHeaderVH;
-import com.flowerfat.initapp.ui.adapter.TourDayAdapter.TourDeatilsVH;
+import com.flowerfat.initapp.ui.adapter.TourDayAdapter.TourDetailsVH;
 import com.flowerfat.initapp.ui.view.TimeAxisView;
 
 import java.util.Calendar;
@@ -24,9 +24,13 @@ import butterknife.OnClick;
 
 /**
  * Created by 明明大美女 on 2016/11/1.
+ *
+ * TODO 在BaseAdapter的基础上，如何我的列表也有两种类型？？？ 及扩展性。
  */
 
-public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHeaderVH, TourDeatilsVH> {
+public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDayAdapter.TourDetailsHeaderVH, TourDetailsVH> {
+
+    public static final int TYPE_SPECIAL = 2;
 
     private int specialPosition;
     // the header's data
@@ -50,23 +54,37 @@ public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHea
     }
 
     @Override
-    public TourDeatilsHeaderVH initHeaderView(ViewGroup parent) {
-        return new TourDayAdapter.TourDeatilsHeaderVH(parent, R.layout.item_tour_detail_header);
+    public TourDetailsHeaderVH initHeaderView(ViewGroup parent) {
+        return new TourDetailsHeaderVH(parent, R.layout.item_tour_detail_header);
     }
 
     @Override
-    public TourDeatilsVH initMainView(ViewGroup parent) {
-        return new TourDayAdapter.TourDeatilsVH(parent, R.layout.item_tour_detail);
+    public TourDetailsVH initMainView(ViewGroup parent) {
+        return new TourDetailsVH(parent, R.layout.item_tour_detail);
     }
 
     @Override
-    public void onHeaderBindViewHolder(TourDeatilsHeaderVH holder, int position) {
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
+    @Override
+    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if(viewType == TYPE_SPECIAL) {
+
+        }
+
+        return super.onCreateViewHolder(parent, viewType);
+    }
+
+    @Override
+    public void onHeaderBindViewHolder(TourDetailsHeaderVH holder, int position) {
         // add the listener , and make sure the position
-        holder.contentTv.setOnClickListener(v -> onClickListener.onClick(v, 1000 + position));
+        holder.rootLayout.setOnClickListener(v -> onClickListener.onClick(v, 1000 + position));
     }
 
     @Override
-    public void onMainBindViewHolder(TourDeatilsVH holder, int position) {
+    public void onMainBindViewHolder(TourDetailsVH holder, int position) {
         // 都是监听器
         if (onClickListener != null) {
             holder.moreIv.setOnClickListener(v -> onClickListener.onClick(v, -1000 + position));
@@ -101,6 +119,12 @@ public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHea
         notifyDataSetChanged();
     }
 
+    /**
+     * 更新header的内容
+     * @param hotelStr hotel name to sleep
+     * @param placeStr place to travel
+     * @param contentStr description for this day
+     */
     public void updateHeader(String hotelStr, String placeStr, String contentStr) {
         if (!TextUtils.isEmpty(hotelStr))
             this.hotelStr = "Hotel: " + hotelStr;
@@ -112,8 +136,10 @@ public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHea
     }
 
 
-    public class TourDeatilsHeaderVH extends BaseViewHolder<TourDay> {
+    public class TourDetailsHeaderVH extends BaseViewHolder<TourDay> {
 
+        @BindView(R.id.item_header_root)
+        FrameLayout rootLayout ;
         @BindView(R.id.item_header_content)
         TextView contentTv;
         @BindView(R.id.item_header_hotel)
@@ -121,7 +147,7 @@ public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHea
         @BindView(R.id.item_header_place)
         TextView placeTv;
 
-        public TourDeatilsHeaderVH(ViewGroup parent, @LayoutRes int resId) {
+        public TourDetailsHeaderVH(ViewGroup parent, @LayoutRes int resId) {
             super(parent, resId);
         }
 
@@ -142,7 +168,7 @@ public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHea
         }
     }
 
-    public class TourDeatilsVH extends BaseViewHolder<TourDetail> {
+    public class TourDetailsVH extends BaseViewHolder<TourDetail> {
 
         @BindView(R.id.item_time_axis_left_axis)
         TimeAxisView axisView;
@@ -161,7 +187,7 @@ public class TourDayAdapter extends BaseHeaderAdapter<TourDetail, TourDeatilsHea
         @BindView(R.id.item_time_axis_phone)
         ImageView phoneIv;
 
-        public TourDeatilsVH(ViewGroup parent, @LayoutRes int resId) {
+        public TourDetailsVH(ViewGroup parent, @LayoutRes int resId) {
             super(parent, resId);
         }
 

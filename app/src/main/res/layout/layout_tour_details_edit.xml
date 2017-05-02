@@ -3,16 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="200dp"
+    android:background="#0000"
     android:orientation="vertical"
     android:paddingLeft="36dp"
     android:paddingRight="16dp"
-    android:paddingTop="8dp"
-    android:background="#0000">
+    android:paddingTop="8dp">
 
-    <ImageView
-        android:layout_width="wrap_content"
+
+    <RadioGroup
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_traffic_bus_ltgray_18dp"/>
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableLeft="@drawable/rb_traffic_bus_selector"
+            android:padding="12dp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableLeft="@drawable/rb_traffic_car_selector"
+            android:gravity="center"
+            android:padding="12dp"
+            android:paddingTop="0dp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableLeft="@drawable/rb_traffic_train_selector"
+            android:padding="12dp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableLeft="@drawable/rb_traffic_plane_selector"
+            android:padding="12dp" />
+
+    </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,9 +57,9 @@
             android:id="@+id/tour_details_edit_titleEt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
             android:layout_weight="1"
             android:hint="Title"
-            android:layout_marginRight="12dp"
             app:met_floatingLabel="normal"
             app:met_singleLineEllipsis="true" />
 
@@ -34,10 +67,10 @@
             android:id="@+id/tour_details_edit_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
             android:drawablePadding="9dp"
             android:drawableRight="@drawable/ic_access_time_ltgray_18dp"
             android:gravity="right"
-            android:layout_marginBottom="4dp"
             android:padding="3dp"
             android:text="time set" />
 
@@ -65,8 +98,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Phone"
-        android:maxLength="11"
         android:inputType="number"
+        android:maxLength="11"
         app:met_floatingLabel="normal"
         app:met_singleLineEllipsis="true" />
 
@@ -75,8 +108,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="The budget"
-        android:maxLength="5"
         android:inputType="number"
+        android:maxLength="5"
         app:met_floatingLabel="normal"
         app:met_singleLineEllipsis="true" />
 
